@@ -1,0 +1,54 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" *ngFor="let banner of banners;let i = index;" [attr.data-slide-to]="i"
+        [ngClass]="{'active':i==0}"></li>
+  </ol>
+  <div class="carousel-inner" role="listbox">
+    <div *ngFor="let banner of banners;let i = index;" [ngClass]="{'item':true,'active':i==0}">
+      <header class="head"
+              [ngStyle]="{'background': 'url('+banner.pic+') no-repeat', 'background-size':'cover'}">
+        <div class="container">
+          <div class="row">
+            <h1 class="lead">{{banner.title}}</h1>
+            <p class="tagline">{{banner.detail}}</p>
+            <p><a class="btn btn-warning btn-lg" role="button" [routerLink]="banner.link">{{banner.action}}</a>
+            </p>
+          </div>
+        </div>
+      </header>
+    </div>
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
+<div class="slogan">
+  <div class="container text-center">
+    <br>
+    <br>
+    <h3 class="thin">{{slogan.title}}</h3>
+    <p class="text-muted">{{slogan.detail}}</p>
+  </div>
+</div>
+
+
+<div class="jumbotron">
+  <div class="container">
+    <h2 class="text-center thin">{{todos.title}}</h2>
+    <h5 class="text-center thin">{{todos.detail}}</h5>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 highlight" *ngFor="let item of todos.items">
+        <div class="h-caption">
+          <img [src]="item.icon" class="icon"/>
+          <h4>{{item.title}}</h4>
+        </div>
+        <div class="h-body text-center">
+          <p class="detail">{{ item.detail}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

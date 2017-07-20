@@ -1,0 +1,21 @@
+<div class="container header-margin">
+  <ol class="breadcrumb">
+    <li>关于我们</li>
+    <li class="active">{{titleNow}}</li>
+  </ol>
+  <div class="row">
+    <aside class="col-md-2 sidebar">
+      <ul class="nav nav-side">
+        <li *ngFor="let link of links" [ngClass]="{'selected':link.title===titleNow}">
+          <a [routerLink]="link.link">
+            {{link.title}}<b></b>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <article class="col-md-10">
+      <router-outlet></router-outlet>
+    </article>
+  </div>
+</div>
+

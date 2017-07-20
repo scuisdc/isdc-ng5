@@ -1,0 +1,26 @@
+<header class="page-header">
+  <h1 class="page-title">社团公告</h1>
+</header>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <div *ngFor="let announce of announces;let i = index;" class="panel panel-success">
+    <div class="panel-heading" role="tab" id="{{'heading'+i}}">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-toggle="collapse" data-parent="#accordion"
+           href="{{'#collapse'+i}}" attr.aria-controls="{{'collapse'+i}}">
+          {{announce.title}}
+        </a>
+      </h4>
+    </div>
+    <div id="{{'collapse'+i}}" class="panel-collapse collapse in" role="tabpanel"
+         attr.aria-labelledby="{{'heading'+i}}">
+      <div class="panel-body">
+        <markdown>
+          {{announce.content}}
+        </markdown>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,147 @@
+/* Form */
+.nav-form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #fff;
+  background-color: rgba(64, 64, 64, 0.5);
+  border: 0;
+  border-radius: 1px;
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.nav-form-control:focus {
+  /*
+    border-color: #fff;
+    outline: 1;
+    -webkit-box-shadow: inset 0 3px 3px rgba(0,0,0,.075), 0 0 8px rgba(255, 255, 255, 0.5);
+            box-shadow: inset 0 3px 3px rgba(0,0,0,.075), 0 0 8px rgba(255, 255, 255, 0.5);
+  */
+  background-color: rgba(96, 96, 96, 0.6);
+}
+
+.nav-form-control::-moz-placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.nav-form-control:-ms-input-placeholder {
+  color: #999;
+}
+
+.nav-form-control::-webkit-input-placeholder {
+  color: #999;
+}
+
+/* Button */
+
+.btn-lg {
+  padding: 15px 65px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Nav */
+
+.navbar-inverse {
+  border-radius: 0;
+  background: rgba(0, 0, 0, .8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  min-height: 100px;
+  padding-top: 25px;
+  margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-brand {
+  font-size: 24px;
+  color: white;
+  padding: 0 0 0 15px;
+  margin: 12px 0 0 0;
+}
+
+.navbar-inverse .navbar-brand img {
+  margin-top: -8px;
+}
+
+.navbar-inverse .navbar-nav > li > a,
+.navbar-inverse .navbar-nav > .open ul > a {
+  color: rgba(255, 255, 255, .4);
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background: none;
+  box-shadow: none;
+}
+
+.navbar-inverse .navbar-nav > .open > a {
+  background: none;
+  color: white;
+  box-shadow: none;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background: none;
+  color: white;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+  background: none;
+  color: white;
+}
+
+.navbar-nav .dropdown-menu {
+  left: -5px;
+  font-size: 13px;
+  background-color: rgba(0, 0, 0, .7);
+  border: 0 none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+.navbar-nav .dropdown-menu > hr {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.navbar-nav .dropdown-menu > li > a {
+  color: rgba(255, 255, 255, .7);
+  padding: 7px 20px;
+}
+
+.navbar-nav .dropdown-menu > li > a:hover,
+.navbar-nav .dropdown-menu > li > a:focus,
+.navbar-nav .dropdown-menu > .active > a:hover {
+  background: rgba(255, 255, 255, .1);
+  color: white;
+}
+
+.navbar-nav .dropdown-menu > .active > a,
+.navbar-nav .dropdown-menu > .active > a:focus {
+  background: none;
+  color: #fff;
+}
+
+.globalnav {
+  float: right;
+}
+
+.globalnav > .nav > li {
+  float: left;
+  cursor: pointer;
+}

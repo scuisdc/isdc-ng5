@@ -1,0 +1,33 @@
+<header class="page-header">
+  <h1 class="page-title">提交建议</h1>
+</header>
+
+<p>想提点建议什么的？尽管写下来吧！</p>
+<br/>
+<form #suggestForm="ngForm" (ngSubmit)="onSubmit()" method="post" id="suggest_form">
+  <div class="row">
+    <div [ngClass]="{'col-sm-6':true, 'has-error':name.dirty&&name.invalid}">
+      <input class="form-control" [(ngModel)]="suggest.name" required type="text" name="fname" id="name" #name="ngModel"
+             placeholder="姓名">
+    </div>
+    <div [ngClass]="{'col-sm-6':true, 'has-error':email.dirty&&email.invalid}">
+      <input class="form-control" [(ngModel)]="suggest.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+             required type="email" name="email" id="email" #email="ngModel"
+             placeholder="邮箱">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div [ngClass]="{'col-sm-12':true,'has-error':message.dirty&&message.invalid}">
+      <textarea name="message" id="message" required [(ngModel)]="suggest.message" placeholder="将你想说的都写下来吧"
+                class="form-control" #message="ngModel"
+                rows="9"></textarea>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-12 text-right">
+      <input class="btn btn-warning" type="submit" value="提交" [disabled]="!suggestForm.form.valid">
+    </div>
+  </div>
+</form>

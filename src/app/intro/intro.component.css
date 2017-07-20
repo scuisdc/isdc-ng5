@@ -1,0 +1,78 @@
+.sidebar {
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.sidebar.widget {
+  margin-bottom: 20px;
+}
+
+.nav-side {
+  border-right: 1px solid #EEEEEE;
+  border-spacing: 1px;
+}
+
+.nav-side > ul, ol {
+  list-style: none;
+  margin-left: 3px;
+}
+
+.nav-side > li > a {
+  color: #000000;
+  font-weight: normal;
+}
+
+.nav-side > li:hover {
+  border-left: 3px solid #f0ad4e;
+}
+
+.nav-side > li > a:hover {
+  color: #f0ad4e;
+  background: none;
+}
+
+.nav-side > li {
+  border-left: 3px solid #ffffff;
+}
+
+.nav-side > li.selected {
+  border-left: 3px solid #008d14;
+  background: none;
+}
+
+.nav-side > li.active {
+  border-left: 3px solid #008d14;
+  background: none;
+}
+
+.nav-side > li.active > a {
+  color: #008d14;
+}
+
+.nav-side > li.selected > a {
+  color: #008d14;
+}
+
+.nav-side > li.active > a > b {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 0;
+  height: 0;
+  border: 5px solid #fff;
+  border-left-color: #008d14;
+  font-size: 0;
+  line-height: 0;
+}
+
+.nav-side > li.selected > a > b {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  width: 0;
+  height: 0;
+  border: 5px solid #fff;
+  border-left-color: #008d14;
+  font-size: 0;
+  line-height: 0;
+}

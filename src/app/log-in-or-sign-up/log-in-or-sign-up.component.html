@@ -1,0 +1,114 @@
+<div class="container header-margin">
+  <ol class="breadcrumb">
+    <li>用户中心</li>
+    <li class="active">{{isRegister?'注册':'登录'}}</li>
+  </ol>
+  <div class="row">
+    <article class="col-xs-12 maincontent">
+      <header class="page-header">
+        <h1 class="page-title">{{isRegister?'注册':'登录'}}</h1>
+      </header>
+
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default" [ngSwitch]="isRegister">
+          <div class="panel-body" *ngSwitchCase="false">
+            <h3 class="thin text-center">登录ISDC网站</h3>
+            <p class="text-center text-muted">没有账号？没关系，赶紧<a (click)="toggleState(true)">注册</a>吧!</p>
+            <hr/>
+
+            <form (ngSubmit)="login()" #loginForm="ngForm" class="form-horizontal" role="form">
+              <div [ngClass]="{'form-group':true,'has-error':logInUserName.dirty&&logInUserName.invalid}">
+                <label for="userid" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                  <input type="text" [(ngModel)]="loginUser.name" class="form-control" id="userid" name="userid"
+                         maxlength="20"
+                         #logInUserName="ngModel"
+                         required
+                         placeholder="User Name">
+                </div>
+              </div>
+              <div [ngClass]="{'form-group':true,'has-error':loginPassword.dirty&&loginPassword.invalid}">
+                <label for="passwd" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                <div class="col-sm-10">
+                  <input type="password" [(ngModel)]="loginUser.password" class="form-control" id="passwd" name="passwd"
+                         required minlength="6" maxlength="30"
+                         #loginPassword="ngModel"
+                         placeholder="Password">
+                </div>
+              </div>
+              <div [ngClass]="{'form-group':true,'has-error':loginCheckCode.dirty&&loginCheckCode.invalid}">
+                <label for="captcha" class="col-sm-2 control-label"><img name="checkcode" src="b.php"
+                                                                         onclick="this.src='b.php?aa='+Math.random()"/></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [(ngModel)]="loginUser.checkCode" id="captcha"
+                         name="checkCode" #loginCheckCode="ngModel"
+                         required maxlength="4" minlength="4"
+                         placeholder="Check Code">
+                </div>
+              </div>
+              <hr/>
+              <div class="form-group text-center">
+                <input type="submit" id="subbtn" value="登&nbsp;录" class="btn btn-warning btn-lg"
+                       [disabled]="!loginForm.form.valid">
+              </div>
+            </form>
+
+
+          </div>
+
+          <div class="panel-body" *ngSwitchCase="true">
+            <h3 class="thin text-center">欢迎加入ISDC</h3>
+            <p class="text-center text-muted">已经注册？赶紧<a (click)="toggleState(false)">登陆</a>我们的网站吧!</p>
+            <hr/>
+
+            <form #registerForm="ngForm" (ngSubmit)="register()" class="form-horizontal"
+                  role="form">
+              <div [ngClass]="{'form-group':true,'has-error':registerEmail.dirty&&registerEmail.invalid}">
+                <label for="registerEmail" class="col-sm-2 control-label">邮&nbsp;&nbsp;&nbsp;&nbsp;箱</label>
+                <div class="col-sm-10">
+                  <input type="email" [(ngModel)]="registerUser.email" class="form-control" id="registerEmail"
+                         #registerEmail="ngModel" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                         name="registerEmail"
+                         placeholder="Email">
+                </div>
+              </div>
+              <div [ngClass]="{'form-group':true,'has-error':registerName.dirty&&registerName.invalid}">
+                <label for="registerName" class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [(ngModel)]="registerUser.name" id="registerName"
+                         #registerName="ngModel" required maxlength="20"
+                         name="registerName"
+                         placeholder="User Name">
+                </div>
+              </div>
+              <div [ngClass]="{'form-group':true,'has-error':registerPassword.dirty&&registerPassword.invalid}">
+                <label for="registerPassword" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                <div class="col-sm-10">
+                  <input type="password" class="form-control" [(ngModel)]="registerUser.password" id="registerPassword"
+                         #registerPassword="ngModel" required minlength="6" maxlength="30"
+                         name="registerPassword"
+                         placeholder="Password">
+                </div>
+              </div>
+              <div [ngClass]="{'form-group':true,'has-error':registerCheckCode.dirty&&registerCheckCode.invalid}">
+                <label for="registerCheckCode" class="col-sm-2 control-label"><img name="checkcode" src="b.php"
+                                                                                   onclick="this.src='b.php?aa='+Math.random()"/></label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" [(ngModel)]="registerUser.checkCode" id="registerCheckCode"
+                         name="registerCheckCode" #registerCheckCode="ngModel" minlength="4" maxlength="4"
+                         placeholder="Check Code">
+                </div>
+              </div>
+              <hr/>
+              <div class="form-group text-center">
+                <input type="submit" class="btn btn-warning btn-lg" value="注&nbsp;册"
+                       [disabled]="!registerForm.form.invalid">
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
