@@ -7,6 +7,10 @@ body {
   margin-top: 100px;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 /* Highlights (in jumbotron in most cases) */
 
 .highlight {

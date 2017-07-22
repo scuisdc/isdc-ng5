@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {User} from '../../provider/user';
 
 @Component({
   selector: 'app-about-suggest',
@@ -7,9 +8,13 @@ import {Component} from '@angular/core';
 })
 export class AboutSuggestComponent {
 
-  suggest: { name: string, email: string, message: string } = {name: '', email: '', message: ''};
+  suggest: { userName: string, email: string, message: string } = {userName: '', email: '', message: ''};
 
-  constructor() {
+  constructor(public user: User) {
+    if (user.user) {
+      this.suggest.email = user.user.email;
+      this.suggest.userName = user.user.userName;
+    }
   }
 
   onSubmit() {

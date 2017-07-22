@@ -8,9 +8,9 @@
       <header class="page-header">
         <h1 class="page-title">{{isRegister?'注册':'登录'}}</h1>
       </header>
-
+      <app-alert [arr]="arr"></app-alert>
       <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="panel panel-default" [ngSwitch]="isRegister">
+        <div class="panel panel-default" *ngIf="!loading" [ngSwitch]="isRegister">
           <div class="panel-body" *ngSwitchCase="false">
             <h3 class="thin text-center">登录ISDC网站</h3>
             <p class="text-center text-muted">没有账号？没关系，赶紧<a (click)="toggleState(true)">注册</a>吧!</p>
@@ -18,13 +18,13 @@
 
             <form (ngSubmit)="login()" #loginForm="ngForm" class="form-horizontal" role="form">
               <div [ngClass]="{'form-group':true,'has-error':logInUserName.dirty&&logInUserName.invalid}">
-                <label for="userid" class="col-sm-2 control-label">用户名</label>
+                <label for="userid" class="col-sm-2 control-label">邮箱</label>
                 <div class="col-sm-10">
-                  <input type="text" [(ngModel)]="loginUser.name" class="form-control" id="userid" name="userid"
-                         maxlength="20"
+                  <input type="text" [(ngModel)]="loginUser.email" class="form-control" id="userid" name="userid"
                          #logInUserName="ngModel"
+                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                          required
-                         placeholder="User Name">
+                         placeholder="Email">
                 </div>
               </div>
               <div [ngClass]="{'form-group':true,'has-error':loginPassword.dirty&&loginPassword.invalid}">
@@ -49,7 +49,7 @@
               <hr/>
               <div class="form-group text-center">
                 <input type="submit" id="subbtn" value="登&nbsp;录" class="btn btn-warning btn-lg"
-                       [disabled]="!loginForm.form.valid">
+                       [disabled]="loginForm.form.invalid">
               </div>
             </form>
 
@@ -75,7 +75,7 @@
               <div [ngClass]="{'form-group':true,'has-error':registerName.dirty&&registerName.invalid}">
                 <label for="registerName" class="col-sm-2 control-label">用户名</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" [(ngModel)]="registerUser.name" id="registerName"
+                  <input type="text" class="form-control" [(ngModel)]="registerUser.userName" id="registerName"
                          #registerName="ngModel" required maxlength="20"
                          name="registerName"
                          placeholder="User Name">
@@ -102,11 +102,34 @@
               <hr/>
               <div class="form-group text-center">
                 <input type="submit" class="btn btn-warning btn-lg" value="注&nbsp;册"
-                       [disabled]="!registerForm.form.invalid">
+                       [disabled]="registerForm.form.invalid">
               </div>
             </form>
           </div>
 
+        </div>
+        <div class="panel panel-default" *ngIf="loading">
+          <div class="panel-body">
+            <h3 class="thin text-center">正在加载……</h3>
+            <!--<p class="text-center text-muted">已经注册？赶紧<a (click)="toggleState(false)">登陆</a>我们的网站吧!</p>-->
+            <hr/>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100"
+                   aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                <span class="sr-only">Loading……</span>
+              </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+          </div>
         </div>
       </div>
     </article>

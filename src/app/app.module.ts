@@ -11,16 +11,17 @@ import {FooterComponent} from './footer/footer.component';
 import {RouterModule, Routes} from '@angular/router';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {IndexComponent} from './index/index.component';
-import {WhatToDoComponent} from './what-to-do/what-to-do.component';
 import {IntroComponent} from './intro/intro.component';
 import {AboutIndexComponent} from './about-index/about-index.component';
 import {AboutAnnounceComponent} from './about-announce/about-announce.component';
 import {AboutSuggestComponent} from './about-suggest/about-suggest.component';
 import {AboutContactComponent} from './about-contact/about-contact.component';
-import {User} from '../Provider/user';
-import {Api} from '../Provider/api'
+import {User} from '../provider/user';
+import {Api} from '../provider/api';
 import {MarkdownModule} from 'angular2-markdown';
 import {LogInOrSignUpComponent} from './log-in-or-sign-up/log-in-or-sign-up.component';
+import {AlertComponent} from './alert/alert.component';
+import {Announcement} from '../provider/announcement';
 
 const appRoutes: Routes = [{
   path: '',
@@ -64,13 +65,13 @@ const appRoutes: Routes = [{
     FooterComponent,
     PageNotFoundComponent,
     IndexComponent,
-    WhatToDoComponent,
     IntroComponent,
     AboutIndexComponent,
     AboutAnnounceComponent,
     AboutSuggestComponent,
     AboutContactComponent,
-    LogInOrSignUpComponent
+    LogInOrSignUpComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +82,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot(),
   ],
-  providers: [User, Api],
+  providers: [User, Api, Announcement],
   bootstrap: [AppComponent]
 })
 export class AppModule {

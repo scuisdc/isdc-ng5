@@ -7,7 +7,8 @@
 <form #suggestForm="ngForm" (ngSubmit)="onSubmit()" method="post" id="suggest_form">
   <div class="row">
     <div [ngClass]="{'col-sm-6':true, 'has-error':name.dirty&&name.invalid}">
-      <input class="form-control" [(ngModel)]="suggest.name" required type="text" name="fname" id="name" #name="ngModel"
+      <input class="form-control" [(ngModel)]="suggest.userName" required type="text" name="fname" id="name"
+             #name="ngModel"
              placeholder="姓名">
     </div>
     <div [ngClass]="{'col-sm-6':true, 'has-error':email.dirty&&email.invalid}">

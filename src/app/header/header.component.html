@@ -23,7 +23,7 @@
             <li><a routerLink="/ctf">ISDCTF</a></li>
           </ul>
         </li>
-        <li><a routerLink="/mirrors">开源镜像</a></li>
+        <!--<li><a href="mirrors.scuisdc.org">开源镜像</a></li>-->
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown">公共服务<b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -48,7 +48,15 @@
         <!--<input type="text" class="nav-form-control" placeholder="Search" id="bdcsMain" required>-->
         <!--</div>-->
         <!--</form>-->
-        <li [ngClass]="{'active':titleNow==='登录/注册'}"><a routerLink="login">登录/注册</a></li>
+        <li *ngIf="!user.user" [ngClass]="{'active':titleNow==='登录/注册'}"><a routerLink="login">登录/注册</a></li>
+        <li *ngIf="user.user"
+            [ngClass]="{'dropdown':true,'active':titleNow==='个人中心'}">
+          <a class="dropdown-toggle" data-toggle="dropdown">{{user.user.userName}}<b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/user/index">个人中心</a></li>
+            <li><a (click)="logOut()">退出登录</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
