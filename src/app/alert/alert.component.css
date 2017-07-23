@@ -1,0 +1,12 @@
+app-alert {
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+  min-height: 100px;
+  padding-top: 25px;
+  margin-bottom: 0;
+}
+
+.alert {
+  margin-bottom: 5px;
+}

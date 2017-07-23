@@ -23,6 +23,8 @@ import {AlertComponent} from './alert/alert.component';
 import {Holder} from '../provider/holder';
 import {CookieModule} from 'ngx-cookie';
 import {ScheduleComponent} from './schedule/schedule.component';
+import {ServiceComponent} from './service/service.component';
+import {ServiceJWCComponent} from './service-jwc/service-jwc.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -51,9 +53,15 @@ const appRoutes: Routes = [{
     path: 'contact',
     component: AboutContactComponent,
     data: {title: '联系我们', color: '#FFFFFF'}
-  }, {
-    path: '**',
-    redirectTo: 'index'
+  }],
+  data: {title: '关于我们', color: '#FFFFFF'}
+}, {
+  path: 'services',
+  component: ServiceComponent,
+  children: [{
+    path: 'jwc',
+    component: ServiceJWCComponent,
+    data: {title: '教务信息查询', color: '#FFFFFF'}
   }],
   data: {title: '关于我们', color: '#FFFFFF'}
 }, {path: '**', component: PageNotFoundComponent, data: {title: '出错啦', color: '#000000'}}];
@@ -73,7 +81,9 @@ const appRoutes: Routes = [{
     AboutContactComponent,
     LogInOrSignUpComponent,
     AlertComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    ServiceComponent,
+    ServiceJWCComponent
   ],
   imports: [
     BrowserModule,

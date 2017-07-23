@@ -1,4 +1,4 @@
-<div *ngFor="let item of arr">
+<div *ngFor="let item of holder.alerts">
   <div class="alert alert-dismissible {{item.level}}" role="alert">
     <button type="button" class="close" (click)="dismiss(item)"><span aria-hidden="true">&times;</span>
     </button>

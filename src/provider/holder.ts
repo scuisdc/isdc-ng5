@@ -6,20 +6,22 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class Holder {
 
-  data: any;
+  announces: any;
+  alerts: { level: string, content: string }[] = [];
 
   constructor(public api: Api) {
 
   }
 
   getAnnounce() {
-    if (this.data) {
-      return Observable.of(this.data);
+    if (this.announces) {
+      return Observable.of(this.announces);
     }
     let seq = this.api.get('intro/announce').share();
     seq.subscribe((data) => {
-      this.data = data;
+      this.announces = data;
     }, err => {
+      this.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
       console.error('ERROR', err);
     });
     return seq;

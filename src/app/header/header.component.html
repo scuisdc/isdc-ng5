@@ -1,4 +1,4 @@
-<div class="navbar navbar-inverse navbar-fixed-top headroom">
+<div class="navbar-fixed-top navbar-inverse headroom">
   <div class="container">
     <div class="navbar-header">
       <!-- Button for smallest screens -->
@@ -24,12 +24,12 @@
           </ul>
         </li>
         <!--<li><a href="mirrors.scuisdc.org">开源镜像</a></li>-->
-        <li class="dropdown">
+        <li [ngClass]="{'dropdown':true,'active':titleNow==='教务信息查询'}">
           <a class="dropdown-toggle" data-toggle="dropdown">公共服务<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a routerLink="/services/jwc/">教务算分</a></li>
-            <li><a routerLink="/services/ctfInfo/">CTF信息</a></li>
-            <li><a routerLink="/services/exploit/">Wooyun漏洞查询</a></li>
+            <li><a routerLink="/services/jwc">教务信息查询</a></li>
+            <li><a routerLink="/services/ctfInfo">CTF信息</a></li>
+            <li><a routerLink="/services/exploit">Wooyun漏洞查询</a></li>
           </ul>
         </li>
         <li
@@ -61,3 +61,4 @@
     </div>
   </div>
 </div>
+<app-alert class="navbar-fixed-top header-margin"></app-alert>

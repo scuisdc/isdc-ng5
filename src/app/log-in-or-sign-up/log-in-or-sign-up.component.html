@@ -8,7 +8,6 @@
       <header class="page-header">
         <h1 class="page-title">{{isRegister?'注册':'登录'}}</h1>
       </header>
-      <app-alert [arr]="arr"></app-alert>
       <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-default" [ngSwitch]="isRegister">
           <div class="panel-body" *ngSwitchCase="false">

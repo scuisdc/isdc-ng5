@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavigationEnd, Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 
 @Component({

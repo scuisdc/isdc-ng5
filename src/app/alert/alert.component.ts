@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Holder} from '../../provider/holder';
 
 @Component({
   selector: 'app-alert',
@@ -7,16 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class AlertComponent implements OnInit {
 
-  @Input() arr: { level: string, content: string }[];
 
-  constructor() {
+  constructor(public holder: Holder) {
+
   }
 
   ngOnInit() {
   }
 
   dismiss(item: { level: string, content: string }) {
-    this.arr.splice(this.arr.indexOf(item), 1);
+    this.holder.alerts.splice(this.holder.alerts.indexOf(item), 1);
   }
 
 }

@@ -3,13 +3,14 @@ import {Api} from './api';
 import 'rxjs/Rx';
 import {Headers, RequestOptions} from '@angular/http';
 import {CookieService} from 'ngx-cookie';
+import {Holder} from './holder';
 @Injectable()
 export class User {
   private headers: Headers = new Headers();
   private requestOption: RequestOptions = new RequestOptions({headers: this.headers, withCredentials: true});
   public user: { userName: string, accessToken: string, email: string };
 
-  constructor(private api: Api, private cookieService: CookieService) {
+  constructor(private api: Api, private cookieService: CookieService, private holder: Holder) {
     let accessToken = cookieService.get('accessToken');
     if (accessToken) {
       this.auth(accessToken);
@@ -21,8 +22,8 @@ export class User {
     seq.subscribe(() => {
     }, err => {
       console.error('ERROR', err);
+      this.holder.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
     });
-
     return seq;
   }
 
@@ -35,6 +36,7 @@ export class User {
         this.cookieService.put('accessToken', this.user.accessToken, {expires: 'Fri, 31 Dec 9999 23:59:59 GMT'});
       }
     }, err => {
+      this.holder.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
       console.error('ERROR', err);
     });
     return seq;
@@ -49,16 +51,17 @@ export class User {
         this.cookieService.put('accessToken', this.user.accessToken, {expires: 'Fri, 31 Dec 9999 23:59:59 GMT'});
       } else {
         this.cookieService.remove('accessToken');
-        //TODO: alert
+        this.holder.alerts.push({level: 'alert-warning', content: '登录已过期，请重新登录'});
       }
     }, err => {
       console.error('ERROR', err);
+      this.holder.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
     });
     return seq;
   }
 
   logOut() {
     this.user = undefined;
-    //TODO: remove token from cookies
+    this.cookieService.remove('accessToken');
   }
 }
