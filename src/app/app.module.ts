@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ResponsiveModule} from 'ng2-responsive';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
@@ -21,7 +20,9 @@ import {Api} from '../provider/api';
 import {MarkdownModule} from 'angular2-markdown';
 import {LogInOrSignUpComponent} from './log-in-or-sign-up/log-in-or-sign-up.component';
 import {AlertComponent} from './alert/alert.component';
-import {Announcement} from '../provider/announcement';
+import {Holder} from '../provider/holder';
+import {CookieModule} from 'ngx-cookie';
+import {ScheduleComponent} from './schedule/schedule.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -71,18 +72,19 @@ const appRoutes: Routes = [{
     AboutSuggestComponent,
     AboutContactComponent,
     LogInOrSignUpComponent,
-    AlertComponent
+    AlertComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    NgbModule.forRoot(),
     ResponsiveModule,
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot(),
+    CookieModule.forRoot()
   ],
-  providers: [User, Api, Announcement],
+  providers: [User, Api, Holder],
   bootstrap: [AppComponent]
 })
 export class AppModule {

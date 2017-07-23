@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MarkdownService} from 'angular2-markdown';
-import {Announcement} from '../../provider/announcement';
+import {Holder} from '../../provider/holder';
 
 @Component({
   selector: 'app-about-announce',
@@ -9,7 +9,7 @@ import {Announcement} from '../../provider/announcement';
 })
 export class AboutAnnounceComponent implements OnInit {
   ngOnInit(): void {
-    this.announcement.getAnnounce().map(data => data.json())
+    this.holder.getAnnounce().map(data => data.json())
       .subscribe(data => {
         this.announces = data.data;
       });
@@ -17,7 +17,7 @@ export class AboutAnnounceComponent implements OnInit {
 
   announces: { title: string, content: string }[];
 
-  constructor(public _markdown: MarkdownService, public announcement: Announcement) {
+  constructor(public _markdown: MarkdownService, public holder: Holder) {
     this._markdown.renderer.table = (header: string, body: string) => {
       return `
       <table class="table table-bordered table-hover table-responsive">

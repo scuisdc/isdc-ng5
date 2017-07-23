@@ -4,7 +4,7 @@ import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class Announcement {
+export class Holder {
 
   data: any;
 
