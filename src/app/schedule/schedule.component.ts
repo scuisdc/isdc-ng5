@@ -30,6 +30,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.holder.getSchedule().subscribe(data => this.data = data.json().data);
   }
 
 }

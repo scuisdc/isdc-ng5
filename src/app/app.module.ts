@@ -53,6 +53,10 @@ const appRoutes: Routes = [{
     path: 'contact',
     component: AboutContactComponent,
     data: {title: '联系我们', color: '#FFFFFF'}
+  }, {
+    path: '',
+    redirectTo: 'index',
+    pathMatch: 'full'
   }],
   data: {title: '关于我们', color: '#FFFFFF'}
 }, {
@@ -62,6 +66,10 @@ const appRoutes: Routes = [{
     path: 'jwc',
     component: ServiceJWCComponent,
     data: {title: '教务信息查询', color: '#FFFFFF'}
+  }, {
+    path: '',
+    redirectTo: 'jwc',
+    pathMatch: 'full'
   }],
   data: {title: '关于我们', color: '#FFFFFF'}
 }, {path: '**', component: PageNotFoundComponent, data: {title: '出错啦', color: '#000000'}}];

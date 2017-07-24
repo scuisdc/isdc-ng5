@@ -37,9 +37,9 @@ export class LogInOrSignUpComponent implements OnInit {
 
   login() {
     this.loading = true;
-    console.log('log in', this.loginUser);
     this.user.login(this.loginUser).map(res => res.json()).subscribe(data => {
       if (data.code == 200) {
+        this.holder.alerts.push({level: 'alert-success', content: `欢迎回来，${data.data.userName}`});
         this.router.navigateByUrl('/');
       } else {
         this.holder.alerts.push({level: 'alert-danger', content: data.message});
@@ -54,7 +54,6 @@ export class LogInOrSignUpComponent implements OnInit {
 
   register() {
     this.loading = true;
-    console.log('register', this.registerUser);
     this.user.signUp(this.registerUser).map(res => res.json()).subscribe(data => {
       if (data.code == 200) {
         this.isRegister = false;

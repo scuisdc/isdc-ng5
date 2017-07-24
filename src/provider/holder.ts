@@ -8,6 +8,8 @@ export class Holder {
 
   announces: any;
   alerts: { level: string, content: string }[] = [];
+  schedule: any;
+  banners: any;
 
   constructor(public api: Api) {
 
@@ -21,7 +23,36 @@ export class Holder {
     seq.subscribe((data) => {
       this.announces = data;
     }, err => {
-      this.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
+      this.alerts.push({level: 'alert-danger', content: '公告获取失败，请稍后再试'});
+      console.error('ERROR', err);
+    });
+    return seq;
+  }
+
+  getSchedule() {
+    if (this.schedule) {
+      return Observable.of(this.schedule);
+    }
+    let seq = this.api.get('schedule').share();
+    seq.subscribe((data) => {
+      this.schedule = data;
+    }, err => {
+      this.alerts.push({level: 'alert-danger', content: '课表获取失败，请稍后再试'});
+      console.error('ERROR', err);
+    });
+    return seq;
+
+  }
+
+  getBanner() {
+    if (this.banners) {
+      return Observable.of(this.banners);
+    }
+    let seq = this.api.get('banner').share();
+    seq.subscribe((data) => {
+      this.banners = data;
+    }, err => {
+      this.alerts.push({level: 'alert-danger', content: '横幅获取失败，请稍后再试'});
       console.error('ERROR', err);
     });
     return seq;

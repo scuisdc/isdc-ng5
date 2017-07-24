@@ -4,7 +4,7 @@
 
 <p>想提点建议什么的？尽管写下来吧！</p>
 <br/>
-<form #suggestForm="ngForm" (ngSubmit)="onSubmit()" method="post" id="suggest_form">
+<form #suggestForm="ngForm" (ngSubmit)="onSubmit()" id="suggest_form">
   <div class="row">
     <div [ngClass]="{'col-sm-6':true, 'has-error':name.dirty&&name.invalid}">
       <input class="form-control" [(ngModel)]="suggest.userName" required type="text" name="fname" id="name"
@@ -28,7 +28,7 @@
   <br>
   <div class="row">
     <div class="col-sm-12 text-right">
-      <input class="btn btn-warning" type="submit" value="提交" [disabled]="!suggestForm.form.valid">
+      <input class="btn btn-warning" type="submit" value="提交" [disabled]="suggestForm.form.invalid">
     </div>
   </div>
 </form>
