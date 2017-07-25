@@ -25,6 +25,7 @@ import {CookieModule} from 'ngx-cookie';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {ServiceComponent} from './service/service.component';
 import {ServiceJWCComponent} from './service-jwc/service-jwc.component';
+import {JWCService} from '../provider/JWCService';
 
 const appRoutes: Routes = [{
   path: '',
@@ -102,7 +103,7 @@ const appRoutes: Routes = [{
     MarkdownModule.forRoot(),
     CookieModule.forRoot()
   ],
-  providers: [User, Api, Holder],
+  providers: [User, Api, Holder, JWCService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

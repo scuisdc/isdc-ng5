@@ -11,9 +11,8 @@ export class User {
   public user: { userName: string, accessToken: string, email: string };
 
   constructor(private api: Api, private cookieService: CookieService, private holder: Holder) {
-    let accessToken = cookieService.get('accessToken');
-    if (accessToken) {
-      this.auth(accessToken);
+    if (cookieService.get('accessToken')) {
+      this.auth();
     }
   }
 
@@ -42,8 +41,8 @@ export class User {
     return seq;
   }
 
-  auth(accessToken: string) {
-    let seq = this.api.get(`user/auth/${accessToken}`, {}, this.requestOption).share();
+  auth() {
+    let seq = this.api.get(`user/auth`, {}, this.requestOption).share();
     seq.subscribe((data) => {
       let res = data.json();
       if (res.code == 200) {

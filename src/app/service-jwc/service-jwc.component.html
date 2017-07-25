@@ -1,23 +1,23 @@
 <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-  <div class="panel panel-default">
+  <div class="panel panel-default" *ngIf="!holder.scores">
     <div class="panel-body">
       <h3 class="thin text-center">教务信息查询</h3>
       <p class="text-center text-muted">放心，我们不会记录你的任何信息：）</p>
       <hr/>
-      <form #jwcForm="ngForm" (ngSubmit)="onSubmit()" id="form" class="form-horizontal"
+      <form #jwcForm="ngForm" (ngSubmit)="onSubmit(jwcForm)" id="form" class="form-horizontal"
             role="form">
         <div class="form-group {{zjh.dirty&&zjh.invalid?'has-error':''}}">
           <label for="zjh" class="col-sm-2 control-label">学&nbsp;&nbsp;&nbsp;号</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" pattern="[0-9]{13}" minlength="13" maxlength="13" required
-                   [(ngModel)]="param.zjh" [disabled]="loading"
+                   [(ngModel)]="payload.zjh" [disabled]="loading"
                    id="zjh" name="zjh" #zjh="ngModel" placeholder="学号">
           </div>
         </div>
         <div class="form-group">
           <label for="mm" class="col-sm-2 control-label">密&nbsp;&nbsp;&nbsp;码</label>
           <div class="col-sm-10">
-            <input [disabled]="loading" type="password" [(ngModel)]="param.mm" required class="form-control" id="mm"
+            <input [disabled]="loading" type="password" [(ngModel)]="payload.mm" required class="form-control" id="mm"
                    name="mm"
                    placeholder="密码">
           </div>
@@ -30,4 +30,48 @@
       </form>
     </div>
   </div>
+</div>
+<div class="panel panel-default" *ngIf="holder.scores">
+  <div class="panel-heading">绩点计算结果
+    <button type="button" class="close" (click)="holder.scores=undefined"><span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="panel-body">
+    <div class="col-xs-6">总绩点：{{calculateGPA(holder.scores).toFixed(2)}}</div>
+    <div class="col-xs-6">总均分：{{calculateScore(holder.scores).toFixed(2)}}</div>
+    <div class="col-xs-6">必修绩点：{{calculateGPA(holder.scores,false,true).toFixed(2)}}</div>
+    <div class="col-xs-6">必修均分：{{calculateScore(holder.scores,false,true).toFixed(2)}}</div>
+    <div class="col-xs-6">选中绩点：{{calculateGPA(holder.scores,true).toFixed(2)}}</div>
+    <div class="col-xs-6">选中均分：{{calculateScore(holder.scores,true).toFixed(2)}}</div>
+  </div>
+
+  <button type="button" class="btn col-xs-4 btn-default btn-lg" (click)="selectAll()">全选</button>
+  <button type="button" class="btn col-xs-4 btn-default btn-lg" (click)="selectMust()">必修</button>
+  <button type="button" class="btn col-xs-4 btn-default btn-lg" (click)="selectNotMust()">选修</button>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <td>课程号</td>
+      <td>课序号</td>
+      <td>课程名</td>
+      <!--<td>英文课程名</td>-->
+      <td>学分</td>
+      <td>属性</td>
+      <td>成绩</td>
+      <td>绩点</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of holder.scores" [ngClass]="{'info':item.selected}" (click)="item.selected = !item.selected">
+      <td>{{item.kch}}</td>
+      <td>{{item.kxh}}</td>
+      <td>{{item.nameCN}}</td>
+      <!--<td>{{item.nameEN}}</td>-->
+      <td>{{item.credit}}</td>
+      <td>{{item.type}}</td>
+      <td>{{item.score}}</td>
+      <td>{{parseGPA(parseScore(item.score))}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

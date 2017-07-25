@@ -8,7 +8,7 @@ import {Holder} from '../../provider/holder';
 })
 export class ScheduleComponent implements OnInit {
 
-  data: {
+  semester: {
     title: string,
     schedule: {
       target: string,
@@ -30,7 +30,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.holder.getSchedule().subscribe(data => this.data = data.json().data);
+    this.holder.getSemester().subscribe(data => this.semester = data.json().data);
   }
 
 }

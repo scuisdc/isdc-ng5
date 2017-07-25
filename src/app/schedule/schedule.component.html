@@ -1,26 +1,26 @@
-<div class="container" *ngIf="data">
-  <h2 class="text-center top-space">{{data.title}}</h2>
+<div class="container" *ngIf="semester">
+  <h2 class="text-center top-space">{{semester.title}}</h2>
   <br>
-  <div class="row" *ngFor="let s of data.schedule">
-    <h3>{{s.target}}</h3>
+  <div class="row" *ngFor="let schedule of semester.schedule">
+    <h3>{{schedule.target}}</h3>
     <table class="table table-hover table-responsive">
       <tbody>
       <tr>
-        <th width="10%">周数</th>
-        <th width="12%">日期</th>
-        <th width="14%">时间</th>
+        <th width="17%">周数</th>
+        <th width="17%">日期</th>
+        <th width="17%">时间</th>
         <th width="12%">主讲人</th>
-        <th width="30%">主讲内容</th>
-        <th width="22%">资料</th>
+        <th width="23%">主讲内容</th>
+        <th width="24%">资料</th>
       </tr>
-      <tr *ngFor="let c of s.course">
-        <td>{{c.week}}</td>
-        <td>{{c.date}}</td>
-        <td>{{c.time}}</td>
-        <td>{{c.host}}</td>
-        <td>{{c.content}}</td>
+      <tr *ngFor="let course of schedule.course">
+        <td>{{course.week}}</td>
+        <td>{{course.date}}</td>
+        <td>{{course.time}}</td>
+        <td>{{course.host}}</td>
+        <td>{{course.content}}</td>
         <td>
-          <a [href]="file.href" *ngFor="let file of c.files">{{file.name}}</a>
+          <a [href]="file.href" *ngFor="let file of course.files">{{file.name}}</a>
         </td>
       </tr>
       </tbody>

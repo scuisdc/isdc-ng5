@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Http} from '@angular/http';
+import {JWCService} from '../../provider/JWCService';
+import {Holder} from '../../provider/holder';
 
 @Component({
   selector: 'app-service-jwc',
@@ -8,13 +9,14 @@ import {Http} from '@angular/http';
 })
 export class ServiceJWCComponent implements OnInit {
 
-  param: { zjh: string, mm: string } = {zjh: '', mm: ''};
+  payload: { zjh: string, mm: string, date: Date } = {zjh: '', mm: '', date: new Date()};
 
   loading: boolean = false;
 
   status: string = '查 询';
 
-  constructor(private http: Http) {
+
+  constructor(private jwcService: JWCService, public holder: Holder) {
   }
 
   ngOnInit() {
@@ -22,8 +24,129 @@ export class ServiceJWCComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
-    this.status = '正在连接教务处……';
-    //TODO: connect JWC
+    this.status = '正在连接服务器……';
+    this.jwcService.calScore(this.payload).map(data => data.json()).subscribe(data => {
+      this.status = data.message;
+      this.startPulling();
+    }, () => {
+      this.loading = false;
+      this.status = '查 询';
+    });
   }
 
+  startPulling() {
+    this.jwcService.getScoreResult(this.payload).delay(1000).map(data => data.json()).subscribe(data => {
+      if (data.code == 200) {
+        if (data.data.complete) {
+          this.status = '查 询';
+          this.loading = false;
+          if (!data.data.success) {
+            this.holder.alerts.push({level: 'alert-danger', content: data.data.result});
+          } else {
+            this.holder.scores = JSON.parse(data.data.result);
+          }
+        } else {
+          this.status = '正在查询……';
+          this.startPulling();
+        }
+      } else {
+        this.loading = false;
+        this.status = '查 询';
+        this.holder.alerts.push({level: 'alert-danger', content: data.message});
+      }
+    });
+  }
+
+
+  calculateGPA(items: any[], selected: boolean = false, must: boolean = false): number {
+    let filtered = items.filter(item => item.score != '').filter(item => selected ? item.selected : true).filter(item => must ? item.type === '必修' : true);
+    if (filtered.length > 0) {
+      let GPA = filtered.map(item => this.parseGPA(this.parseScore(item.score)) * parseInt(item.credit)).reduce((v, v2) => v + v2);
+      let credit = filtered.map(item => parseInt(item.credit)).reduce((v, v2) => v + v2);
+      if (credit != 0) {
+        return (GPA / credit);
+      }
+    }
+    return 0;
+  }
+
+  calculateScore(items: any[], selected: boolean = false, must: boolean = false): number {
+    let filtered = items.filter(item => item.score != '').filter(item => selected ? item.selected : true).filter(item => must ? item.type === '必修' : true);
+    if (filtered.length > 0) {
+      let score = filtered.map(item => item.score * parseInt(item.credit)).reduce((v, v2) => v + v2);
+      let credit = filtered.map(item => parseInt(item.credit)).reduce((v, v2) => v + v2);
+      if (credit != 0) {
+        return (score / credit);
+      }
+    }
+    return 0;
+  }
+
+
+  parseScore(str: string): number {
+    let score;
+    switch (str) {
+      case '优秀':
+        score = 95;
+        break;
+      case '良好':
+        score = 85;
+        break;
+      case '中等':
+        score = 75;
+        break;
+      case '通过':
+        score = 60;
+        break;
+      case '及格':
+        score = 60;
+        break;
+      case '未通过':
+        score = 0;
+        break;
+      case '暂无':
+        score = 0;
+        break;
+      default:
+        score = parseInt(str);
+    }
+    return score;
+  }
+
+  parseGPA(score: number): number {
+    let gpa;
+    if (score >= 95) {
+      gpa = 4.0;
+    } else if (score >= 90) {
+      gpa = 3.8;
+    } else if (score >= 85) {
+      gpa = 3.6;
+    } else if (score >= 80) {
+      gpa = 3.2;
+    } else if (score >= 75) {
+      gpa = 2.7;
+    } else if (score >= 70) {
+      gpa = 2.2;
+    } else if (score >= 65) {
+      gpa = 1.7;
+    } else if (score >= 60) {
+      gpa = 1.0;
+    } else {
+      gpa = 0.0;
+    }
+    return gpa;
+  }
+
+  selectAll() {
+    let b = this.holder.scores.filter(item => item.selected).length == 0;
+    this.holder.scores.forEach(item => item.selected = b);
+  }
+
+  selectMust() {
+    this.holder.scores.forEach(item => item.selected = item.type === '必修');
+  }
+
+  selectNotMust() {
+    this.holder.scores.forEach(item => item.selected = item.type != '必修');
+  }
 }

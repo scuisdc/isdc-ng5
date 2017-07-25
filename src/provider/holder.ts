@@ -8,8 +8,9 @@ export class Holder {
 
   announces: any;
   alerts: { level: string, content: string }[] = [];
-  schedule: any;
+  semester: any;
   banners: any;
+  scores: any;
 
   constructor(public api: Api) {
 
@@ -29,13 +30,13 @@ export class Holder {
     return seq;
   }
 
-  getSchedule() {
-    if (this.schedule) {
-      return Observable.of(this.schedule);
+  getSemester() {
+    if (this.semester) {
+      return Observable.of(this.semester);
     }
     let seq = this.api.get('schedule').share();
     seq.subscribe((data) => {
-      this.schedule = data;
+      this.semester = data;
     }, err => {
       this.alerts.push({level: 'alert-danger', content: '课表获取失败，请稍后再试'});
       console.error('ERROR', err);

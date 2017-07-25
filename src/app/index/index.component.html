@@ -11,8 +11,9 @@
           <div class="row">
             <h1 class="lead">{{banner.title}}</h1>
             <p class="tagline">{{banner.detail}}</p>
-            <p><a class="btn btn-warning btn-lg" role="button" [routerLink]="banner.link">{{banner.action}}</a>
-            </p>
+            <p><a *ngIf="banner.routerLink" class="btn btn-warning btn-lg" role="button"
+                  [routerLink]="banner.routerLink">{{banner.action}}</a>
+            <p><a *ngIf="banner.href" class="btn btn-warning btn-lg" role="button" [href]="banner.href">{{banner.action}}</a>
           </div>
         </div>
       </header>
