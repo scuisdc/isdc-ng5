@@ -1,0 +1,60 @@
+<div class="container header-margin">
+  <ol class="breadcrumb">
+    <li>博客</li>
+    <li>
+      <a routerLink="/blog">所有博文</a>
+    </li>
+    <li class="active">{{post.title}}</li>
+  </ol>
+  <div id="blog" class="row">
+    <article class="col-md-12 maincontent">
+      <div class="post-content">
+        <div id="title" class="text-center">
+          <h1>{{post.title}}</h1>
+          <h2>
+            <small>
+              by <a>{{post.userName}}</a>
+            </small>
+          </h2>
+        </div>
+        <markdown [data]="post.content"></markdown>
+      </div>
+    </article>
+  </div>
+  <div id="comments">
+    <div class="content-preview">
+      <div class="post-content">
+        <h3 class="text-primary">评论区</h3>
+        <div id="comments-field">
+          <div *ngFor="let comment of comments;">
+
+            <div class="comment-cell">
+              <h4>
+                {{comment.userName}}
+                <small>{{parseDate(comment.commentDate)}}</small>
+              </h4>
+              <markdown>{{comment.content}}</markdown>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div id="post-comment">
+          <form id="comment-form" #commentForm="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label for="my-comment">我要评论</label>
+              <br/>
+              <textarea required id="my-comment" [disabled]="!user.user" [(ngModel)]="myComment" class="form-control"
+                        name="my-comment"
+                        rows="7"></textarea>
+            </div>
+            <div class="form-group">
+              <input id="comment_btn" type="submit" class="btn btn-primary"
+                     value="{{ loading?'请求中……':(user.user?'发表':'请先登录再发表评论')}}"
+                     [disabled]="!user.user||commentForm.form.invalid||loading"/>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

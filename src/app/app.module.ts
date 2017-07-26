@@ -21,11 +21,12 @@ import {MarkdownModule} from 'angular2-markdown';
 import {LogInOrSignUpComponent} from './log-in-or-sign-up/log-in-or-sign-up.component';
 import {AlertComponent} from './alert/alert.component';
 import {Holder} from '../provider/holder';
-import {CookieModule} from 'ngx-cookie';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {ServiceComponent} from './service/service.component';
 import {ServiceJWCComponent} from './service-jwc/service-jwc.component';
 import {JWCService} from '../provider/JWCService';
+import {BlogComponent} from './blog/blog.component';
+import {PostComponent} from './post/post.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -35,6 +36,14 @@ const appRoutes: Routes = [{
   path: 'login',
   component: LogInOrSignUpComponent,
   data: {title: '登录/注册', color: '#FFFFFF'}
+}, {
+  path: 'blog',
+  component: BlogComponent,
+  data: {title: '博客', color: '#FFFFFF'}
+}, {
+  path: 'blog/:id',
+  component: PostComponent,
+  data: {title: '博客', color: '#FFFFFF'}
 }, {
   path: 'intro',
   component: IntroComponent,
@@ -92,7 +101,9 @@ const appRoutes: Routes = [{
     AlertComponent,
     ScheduleComponent,
     ServiceComponent,
-    ServiceJWCComponent
+    ServiceJWCComponent,
+    BlogComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -100,8 +111,7 @@ const appRoutes: Routes = [{
     HttpModule,
     ResponsiveModule,
     RouterModule.forRoot(appRoutes),
-    MarkdownModule.forRoot(),
-    CookieModule.forRoot()
+    MarkdownModule.forRoot()
   ],
   providers: [User, Api, Holder, JWCService],
   bootstrap: [AppComponent]

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Api} from './api';
 import 'rxjs/Rx';
 import {Headers, RequestOptions} from '@angular/http';
-import {CookieService} from 'ngx-cookie';
 import {Holder} from './holder';
 @Injectable()
 export class User {
@@ -10,8 +9,8 @@ export class User {
   private requestOption: RequestOptions = new RequestOptions({headers: this.headers, withCredentials: true});
   public user: { userName: string, accessToken: string, email: string };
 
-  constructor(private api: Api, private cookieService: CookieService, private holder: Holder) {
-    if (cookieService.get('accessToken')) {
+  constructor(private api: Api, private holder: Holder) {
+    if (this.getCookie('accessToken')) {
       this.auth();
     }
   }
@@ -32,10 +31,10 @@ export class User {
       let res = data.json();
       if (res.code == 200) {
         this.user = res.data;
-        this.cookieService.put('accessToken', this.user.accessToken, {expires: 'Fri, 31 Dec 9999 23:59:59 GMT'});
+        document.cookie = `accessToken=${this.user.accessToken}; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/`;
       }
     }, err => {
-      this.holder.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
+      this.holder.alerts.push({level: 'alert-danger', content: '登录失败，请稍后再试'});
       console.error('ERROR', err);
     });
     return seq;
@@ -47,20 +46,48 @@ export class User {
       let res = data.json();
       if (res.code == 200) {
         this.user = res.data;
-        this.cookieService.put('accessToken', this.user.accessToken, {expires: 'Fri, 31 Dec 9999 23:59:59 GMT'});
+        document.cookie = `accessToken=${this.user.accessToken}; expires=Thu, 18 Dec 2018 12:00:00 UTC; path=/`;
       } else {
-        this.cookieService.remove('accessToken');
-        this.holder.alerts.push({level: 'alert-warning', content: '登录已过期，请重新登录'});
+        document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       }
     }, err => {
       console.error('ERROR', err);
-      this.holder.alerts.push({level: 'alert-danger', content: '服务器故障，请稍后再试'});
+      this.holder.alerts.push({level: 'alert-danger', content: '登录失败，请稍后再试'});
     });
     return seq;
   }
 
   logOut() {
     this.user = undefined;
-    this.cookieService.remove('accessToken');
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  }
+
+  getCookie(cname: string) {
+    let name = cname + '=';
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
+  }
+
+  sendComment(myComment: string, postId: number) {
+    let seq = this.api.post(`blog/post/${postId}/comment`, {
+      content: myComment,
+      commentDate: new Date()
+    }, this.requestOption).share();
+    seq.subscribe(() => {
+    }, err => {
+      console.error('ERROR', err);
+      this.holder.alerts.push({level: 'alert-danger', content: '评论失败，请稍后再试'});
+    });
+    return seq;
   }
 }
