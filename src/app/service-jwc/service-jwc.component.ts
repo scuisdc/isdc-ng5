@@ -20,6 +20,7 @@ export class ServiceJWCComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   onSubmit() {
@@ -44,6 +45,7 @@ export class ServiceJWCComponent implements OnInit {
             this.holder.alerts.push({level: 'alert-danger', content: data.data.result});
           } else {
             this.holder.scores = JSON.parse(data.data.result);
+
           }
         } else {
           this.status = '正在查询……';

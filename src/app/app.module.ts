@@ -1,8 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-
 import {AppComponent} from './app.component';
 import {ResponsiveModule} from 'ng2-responsive';
 import {HeaderComponent} from './header/header.component';
@@ -27,6 +26,8 @@ import {ServiceJWCComponent} from './service-jwc/service-jwc.component';
 import {JWCService} from '../provider/JWCService';
 import {BlogComponent} from './blog/blog.component';
 import {PostComponent} from './post/post.component';
+import {ServiceKongMinHaoComponent} from './service-kong-min-hao/service-kong-min-hao.component';
+import {KongMinHaoService} from "../provider/KongMinHaoService";
 
 const appRoutes: Routes = [{
   path: '',
@@ -77,6 +78,10 @@ const appRoutes: Routes = [{
     component: ServiceJWCComponent,
     data: {title: '教务信息查询', color: '#FFFFFF'}
   }, {
+    path: 'KongMinHao',
+    component: ServiceKongMinHaoComponent,
+    data: {title: '孔壕资产加加加', color: '#FFFFFF'}
+  }, {
     path: '',
     redirectTo: 'jwc',
     pathMatch: 'full'
@@ -102,6 +107,7 @@ const appRoutes: Routes = [{
     ScheduleComponent,
     ServiceComponent,
     ServiceJWCComponent,
+    ServiceKongMinHaoComponent,
     BlogComponent,
     PostComponent
   ],
@@ -113,7 +119,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService],
+  providers: [User, Api, Holder, JWCService,KongMinHaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

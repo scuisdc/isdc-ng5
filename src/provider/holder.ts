@@ -14,6 +14,8 @@ export class Holder {
   posts: Response;
   content: { [key: string]: Response; } = {};
   comment: { [key: string]: Response; } = {};
+  money : number;
+
 
   constructor(public api: Api) {
 
