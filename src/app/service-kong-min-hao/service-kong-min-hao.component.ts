@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import {KongMinHaoService} from '../../provider/KongMinHaoService';
 import {Holder} from '../../provider/holder';
+import {takeWhile} from "rxjs/operator/takeWhile";
 
 @Component({
   selector: 'app-service-kong-min-hao',
   templateUrl: './service-kong-min-hao.component.html',
   styleUrls: ['./service-kong-min-hao.component.css']
 })
-export class ServiceKongMinHaoComponent implements OnInit {
-
+export class ServiceKongMinHaoComponent implements OnInit,OnDestroy {
+  private alive: boolean = true;
   payload: { name:string , money:number } = { name : 'KongMinHao', money : 0};
   constructor(private kongMinHaoService: KongMinHaoService, public holder: Holder) {
 
@@ -16,8 +17,9 @@ export class ServiceKongMinHaoComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.getAsset();//这样就可以用
+  takeWhile(() => this.alive).subscribe(user => {
+    this.getAsset();
+  });
   }
 
  increaseAsset() {
@@ -37,5 +39,8 @@ getAsset(){
     });
 
 }
+  public ngOnDestroy() {
+    this.alive = false;
+  }
 
 }
