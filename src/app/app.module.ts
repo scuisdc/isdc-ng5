@@ -80,7 +80,7 @@ const appRoutes: Routes = [{
   }, {
     path: 'KongMinHao',
     component: ServiceKongMinHaoComponent,
-    data: {title: '孔壕资产加加加', color: '#FFFFFF'}
+    data: {title: '资产加加加', color: '#FFFFFF'}
   }, {
     path: '',
     redirectTo: 'jwc',

@@ -1,7 +1,7 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {KongMinHaoService} from '../../provider/KongMinHaoService';
 import {Holder} from '../../provider/holder';
-import {takeWhile} from "rxjs/operator/takeWhile";
+
 
 @Component({
   selector: 'app-service-kong-min-hao',
@@ -10,37 +10,50 @@ import {takeWhile} from "rxjs/operator/takeWhile";
 })
 export class ServiceKongMinHaoComponent implements OnInit,OnDestroy {
   private alive: boolean = true;
-  payload: { name:string , money:number } = { name : 'KongMinHao', money : 0};
+  payload: {name: string, money: number} = {name: '', money: 0};
+
+
   constructor(private kongMinHaoService: KongMinHaoService, public holder: Holder) {
-
-
   }
 
   ngOnInit() {
-  takeWhile(() => this.alive).subscribe(user => {
-    this.getAsset();
-  });
+    this.startPulling();
   }
 
- increaseAsset() {
-
-    this.kongMinHaoService.increaseAsset(this.payload);
-    this.getAsset();
-  }
-getAsset(){
-    console.log("孔壕最有钱了");
-    this.kongMinHaoService.getAsset(this.payload).delay(100).map(data => data.json()).subscribe(data => {
-      if (data.code == 200) {
-            this.holder.money = JSON.parse(data.data.money);
-            this.getAsset();
-      } else {
-        this.holder.money = 0;
-      }
-    });
-
-}
   public ngOnDestroy() {
     this.alive = false;
+  }
+
+  increaseAsset() {
+    this.kongMinHaoService.increaseAsset(this.payload);
+  }
+
+  getAsset() {
+    console.log("孔壕最有钱了");
+    if (this.payload.name) {
+      this.kongMinHaoService.getAsset(this.payload).takeWhile(() => (this.alive)).delay(100).map(data => data.json()).subscribe(data => {
+        if (data.code == 200) {
+          this.holder.money = JSON.parse(data.data.money);
+          this.getAsset();
+        } else {
+          this.holder.money = undefined;
+        }
+      });
+    }
+  }
+  startWorship(name:string){
+    this.payload.name=name;
+    this.getAsset();
+  }
+  startPulling(){
+    this.kongMinHaoService.getRank().takeWhile(()=>(this.alive)).delay(1000).map(data => data.json()).subscribe(data => {
+      if(data.code ==200){
+        this.holder.Rank =data.data;
+        this.startPulling();
+      }else{
+        this.holder.alerts.push({level: 'alert-danger', content: data.message});
+      }
+    })
   }
 
 }
