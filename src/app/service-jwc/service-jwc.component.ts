@@ -11,9 +11,9 @@ export class ServiceJWCComponent implements OnInit {
 
   payload: { zjh: string, mm: string, date: Date } = {zjh: '', mm: '', date: new Date()};
 
-  loading: boolean = false;
+  loading = false;
 
-  status: string = '查 询';
+  status = '查 询';
 
 
   constructor(private jwcService: JWCService, public holder: Holder) {
@@ -37,7 +37,7 @@ export class ServiceJWCComponent implements OnInit {
 
   startPulling() {
     this.jwcService.getScoreResult(this.payload).delay(1000).map(data => data.json()).subscribe(data => {
-      if (data.code == 200) {
+      if (data.code === 200) {
         if (data.data.complete) {
           this.status = '查 询';
           this.loading = false;
@@ -60,11 +60,13 @@ export class ServiceJWCComponent implements OnInit {
 
 
   calculateGPA(items: any[], selected: boolean = false, must: boolean = false): number {
-    let filtered = items.filter(item => item.score != '').filter(item => selected ? item.selected : true).filter(item => must ? item.type === '必修' : true);
+    const filtered = items.filter(item => item.score !== '')
+      .filter(item => selected ? item.selected : true)
+      .filter(item => must ? item.type === '必修' : true);
     if (filtered.length > 0) {
-      let GPA = filtered.map(item => this.parseGPA(this.parseScore(item.score)) * parseInt(item.credit)).reduce((v, v2) => v + v2);
-      let credit = filtered.map(item => parseInt(item.credit)).reduce((v, v2) => v + v2);
-      if (credit != 0) {
+      const GPA = filtered.map(item => this.parseGPA(this.parseScore(item.score)) * parseInt(item.credit, 10)).reduce((v, v2) => v + v2);
+      const credit = filtered.map(item => parseInt(item.credit, 10)).reduce((v, v2) => v + v2);
+      if (credit !== 0) {
         return (GPA / credit);
       }
     }
@@ -72,11 +74,13 @@ export class ServiceJWCComponent implements OnInit {
   }
 
   calculateScore(items: any[], selected: boolean = false, must: boolean = false): number {
-    let filtered = items.filter(item => item.score != '').filter(item => selected ? item.selected : true).filter(item => must ? item.type === '必修' : true);
+    const filtered = items.filter(item => item.score !== '')
+      .filter(item => selected ? item.selected : true)
+      .filter(item => must ? item.type === '必修' : true);
     if (filtered.length > 0) {
-      let score = filtered.map(item => item.score * parseInt(item.credit)).reduce((v, v2) => v + v2);
-      let credit = filtered.map(item => parseInt(item.credit)).reduce((v, v2) => v + v2);
-      if (credit != 0) {
+      const score = filtered.map(item => item.score * parseInt(item.credit, 10)).reduce((v, v2) => v + v2);
+      const credit = filtered.map(item => parseInt(item.credit, 10)).reduce((v, v2) => v + v2);
+      if (credit !== 0) {
         return (score / credit);
       }
     }
@@ -109,7 +113,7 @@ export class ServiceJWCComponent implements OnInit {
         score = 0;
         break;
       default:
-        score = parseInt(str);
+        score = parseInt(str, 10);
     }
     return score;
   }
@@ -139,7 +143,7 @@ export class ServiceJWCComponent implements OnInit {
   }
 
   selectAll() {
-    let b = this.holder.scores.filter(item => item.selected).length == 0;
+    const b = this.holder.scores.filter(item => item.selected).length === 0;
     this.holder.scores.forEach(item => item.selected = b);
   }
 
@@ -148,6 +152,6 @@ export class ServiceJWCComponent implements OnInit {
   }
 
   selectNotMust() {
-    this.holder.scores.forEach(item => item.selected = item.type != '必修');
+    this.holder.scores.forEach(item => item.selected = item.type !== '必修');
   }
 }

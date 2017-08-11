@@ -11,8 +11,8 @@ import {Holder} from '../../provider/holder';
 })
 export class LogInOrSignUpComponent implements OnInit {
 
-  isRegister: boolean = false;
-  loading: boolean = false;
+  isRegister = false;
+  loading = false;
 
   checkCode: string = this.api.url + '/user/authCode?a=' + Math.random();
 
@@ -31,14 +31,15 @@ export class LogInOrSignUpComponent implements OnInit {
   }
 
   toggleState(v: boolean) {
-    if (!this.loading)
+    if (!this.loading) {
       this.isRegister = v;
+    }
   }
 
   login() {
     this.loading = true;
     this.user.login(this.loginUser).map(res => res.json()).subscribe(data => {
-      if (data.code == 200) {
+      if (data.code === 200) {
         this.holder.alerts.push({level: 'alert-success', content: `欢迎回来，${data.data.userName}`});
         this.router.navigateByUrl('/');
       } else {
@@ -55,10 +56,10 @@ export class LogInOrSignUpComponent implements OnInit {
   register() {
     this.loading = true;
     this.user.signUp(this.registerUser).map(res => res.json()).subscribe(data => {
-      if (data.code == 200) {
+      if (data.code === 200) {
         this.isRegister = false;
       }
-      this.holder.alerts.push({level: data.code == 200 ? 'alert-success' : 'alert-danger', content: data.message});
+      this.holder.alerts.push({level: data.code === 200 ? 'alert-success' : 'alert-danger', content: data.message});
     }, () => {
       this.loading = false;
     }, () => {

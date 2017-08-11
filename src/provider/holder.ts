@@ -14,8 +14,8 @@ export class Holder {
   posts: Response;
   content: { [key: string]: Response; } = {};
   comment: { [key: string]: Response; } = {};
-  money : number;
-  Rank :any[];
+  money: number;
+  Rank: any[];
 
   constructor(public api: Api) {
 
@@ -25,7 +25,7 @@ export class Holder {
     if (this.announces) {
       return Observable.of(this.announces);
     }
-    let seq = this.api.get('intro/announce').share();
+    const seq = this.api.get('intro/announce').share();
     seq.subscribe((data) => {
       this.announces = data;
     }, err => {
@@ -39,7 +39,7 @@ export class Holder {
     if (this.semester) {
       return Observable.of(this.semester);
     }
-    let seq = this.api.get('schedule').share();
+    const seq = this.api.get('schedule').share();
     seq.subscribe((data) => {
       this.semester = data;
     }, err => {
@@ -54,7 +54,7 @@ export class Holder {
     if (this.banners) {
       return Observable.of(this.banners);
     }
-    let seq = this.api.get('banner').share();
+    const seq = this.api.get('banner').share();
     seq.subscribe((data) => {
       this.banners = data;
     }, err => {
@@ -68,7 +68,7 @@ export class Holder {
     if (this.posts) {
       return Observable.of(this.posts);
     }
-    let seq = this.api.get('blog/post').share();
+    const seq = this.api.get('blog/post').share();
     seq.subscribe((data) => {
       this.posts = data;
     }, err => {
@@ -82,7 +82,7 @@ export class Holder {
     if (this.content[id]) {
       return Observable.of(this.content[id]);
     }
-    let seq = this.api.get(`blog/post/${id}`).share();
+    const seq = this.api.get(`blog/post/${id}`).share();
     seq.subscribe((data) => {
       this.content[id.toString()] = data;
     }, err => {
@@ -96,7 +96,7 @@ export class Holder {
     // if (this.comment[id]) {
     //   return Observable.of(this.comment[id]);
     // }
-    let seq = this.api.get(`blog/post/${id}/comment`).share();
+    const seq = this.api.get(`blog/post/${id}/comment`).share();
     seq.subscribe((data) => {
       this.comment[id.toString()] = data;
     }, err => {

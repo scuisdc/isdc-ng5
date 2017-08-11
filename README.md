@@ -25,6 +25,6 @@ npm install
 
 ### run
 ```shell
-ng serve
+npm run start
 ```
 > 打开浏览器输入localhost:4200

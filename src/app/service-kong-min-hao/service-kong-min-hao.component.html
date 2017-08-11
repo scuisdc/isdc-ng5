@@ -5,7 +5,9 @@
       <h3 class="thin text-center">资产加加加</h3>
 
       <hr/>
-      <div *ngIf="!payload.name">
+      <br>
+      <form *ngIf="!payload.name" #kmhForm="ngForm" id="form" class="form-horizontal"
+            role="form">
         <label for="name" class="col-sm-2 control-label">姓&nbsp;&nbsp;&nbsp;名</label>
         <div class="col-sm-10">
           <input #RicherName (keyup)="0" [disabled]="payload.name.length>0" type="text" required class="form-control"
@@ -14,13 +16,17 @@
                  placeholder="姓名">
         </div>
         <hr/>
+        <br><br>
+
 
         <div class="form-group text-center">
           <button class="btn btn-warning btn-lg" [disabled]="payload.name.length>0"
                   (click)="startWorship(RicherName.value)">确认
           </button>
         </div>
-      </div>
+        <br>
+
+      </form>
 
       <div class="panel panel-default" *ngIf="holder.money!=undefined&&payload.name">
         <div class="panel-heading">资产加加加
@@ -45,18 +51,18 @@
 <div class="col-md-3  col-sm-2 ">
   <p>财富top10</p>
   <table class="table">
-  <thead>
-  <tr>
-    <td>姓名</td>
-    <td>资产</td>
+    <thead>
+    <tr>
+      <td>姓名</td>
+      <td>资产</td>
 
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of holder.Rank" [ngClass]="{'info':item.selected}" (click)="item.selected = !item.selected">
-    <td>{{item.name}}</td>
-    <td>{{item.money}}</td>
-  </tr>
-  </tbody>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of holder.Rank" [ngClass]="{'info':item.selected}" (click)="item.selected = !item.selected">
+      <td>{{item.name}}</td>
+      <td>{{item.money}}</td>
+    </tr>
+    </tbody>
   </table>
 </div>

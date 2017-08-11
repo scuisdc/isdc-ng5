@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, Component} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
@@ -27,7 +27,7 @@ import {JWCService} from '../provider/JWCService';
 import {BlogComponent} from './blog/blog.component';
 import {PostComponent} from './post/post.component';
 import {ServiceKongMinHaoComponent} from './service-kong-min-hao/service-kong-min-hao.component';
-import {KongMinHaoService} from "../provider/KongMinHaoService";
+import {KongMinHaoService} from '../provider/KongMinHaoService';
 
 const appRoutes: Routes = [{
   path: '',
@@ -119,7 +119,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService,KongMinHaoService],
+  providers: [User, Api, Holder, JWCService, KongMinHaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

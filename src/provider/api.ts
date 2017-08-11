@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class Api {
-  url: string = 'http://localhost:8080/api';
+  url = '/api';
 
   constructor(public http: Http) {
   }
@@ -16,7 +16,7 @@ export class Api {
     }
     if (params) {
       const p = new URLSearchParams();
-      for (let k in params) {
+      for (const k in params) {
         p.set(k, params[k]);
       }
       options.search = !options.search && p || options.search;

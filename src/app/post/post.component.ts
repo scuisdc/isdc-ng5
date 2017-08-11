@@ -15,7 +15,7 @@ export class PostComponent implements OnInit, OnDestroy {
   post: any = {content: ''};
   comments: any;
   sub: Subscription;
-  myComment: string = '';
+  myComment = '';
   loading = false;
 
   constructor(public holder: Holder, private route: ActivatedRoute, public user: User, private api: Api) {
@@ -46,7 +46,7 @@ export class PostComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.loading = true;
     this.user.sendComment(this.myComment, this.post.id).map(data => data.json()).subscribe(data => {
-      if (data.code == 200) {
+      if (data.code === 200) {
         this.holder.alerts.push({level: 'alert-success', content: '评论成功'});
         this.comments.push({content: this.myComment, userName: this.user.user.userName, commentDate: new Date()});
         this.myComment = '';
@@ -54,6 +54,6 @@ export class PostComponent implements OnInit, OnDestroy {
         this.holder.alerts.push({level: 'alert-success', content: '评论成功'});
       }
       this.loading = false;
-    })
+    });
   }
 }

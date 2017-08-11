@@ -8,14 +8,14 @@ import {Holder} from '../../provider/holder';
   styleUrls: ['./about-announce.component.css']
 })
 export class AboutAnnounceComponent implements OnInit {
+  announces: { title: string, content: string }[];
+
   ngOnInit(): void {
     this.holder.getAnnounce().map(data => data.json())
       .subscribe(data => {
         this.announces = data.data;
       });
   }
-
-  announces: { title: string, content: string }[];
 
   constructor(public _markdown: MarkdownService, public holder: Holder) {
     this._markdown.renderer.table = (header: string, body: string) => {
@@ -26,7 +26,7 @@ export class AboutAnnounceComponent implements OnInit {
         </tbody>
       </table>
       `;
-    }
+    };
   }
 
 
