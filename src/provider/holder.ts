@@ -15,7 +15,7 @@ export class Holder {
   content: { [key: string]: Response; } = {};
   comment: { [key: string]: Response; } = {};
   money : number;
-
+  Rank :any[];
 
   constructor(public api: Api) {
 
