@@ -45,15 +45,15 @@
 <div class="col-md-3  col-sm-2 ">
   <p>财富top10</p>
   <table class="table">
-  <thead>
+  <thead >
   <tr>
     <td>姓名</td>
     <td>资产</td>
 
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let item of holder.Rank" [ngClass]="{'info':item.selected}" (click)="item.selected = !item.selected">
+  <tbody >
+  <tr *ngFor="let item of holder.Rank" [ngClass]="{'info':item.selected}" >
     <td>{{item.name}}</td>
     <td>{{item.money}}</td>
   </tr>
