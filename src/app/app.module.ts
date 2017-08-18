@@ -28,7 +28,9 @@ import {BlogComponent} from './blog/blog.component';
 import {PostComponent} from './post/post.component';
 import {ServiceKongMinHaoComponent} from './service-kong-min-hao/service-kong-min-hao.component';
 import {KongMinHaoService} from '../provider/KongMinHaoService';
-
+import { ServiceMatrixComponent } from './service-matrix/service-matrix.component';
+import {LinearAlgebra}from'../provider/LinearAlgebra'
+import {from} from "rxjs/observable/from";
 const appRoutes: Routes = [{
   path: '',
   component: IndexComponent,
@@ -82,6 +84,10 @@ const appRoutes: Routes = [{
     component: ServiceKongMinHaoComponent,
     data: {title: '资产加加加', color: '#FFFFFF'}
   }, {
+    path: 'Matrix',
+    component: ServiceMatrixComponent,
+    data: {title: '矩阵计算器', color: '#FFFFFF'}
+  }, {
     path: '',
     redirectTo: 'jwc',
     pathMatch: 'full'
@@ -109,7 +115,8 @@ const appRoutes: Routes = [{
     ServiceJWCComponent,
     ServiceKongMinHaoComponent,
     BlogComponent,
-    PostComponent
+    PostComponent,
+    ServiceMatrixComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +126,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, KongMinHaoService],
+  providers: [User, Api, Holder, JWCService, KongMinHaoService,LinearAlgebra],
   bootstrap: [AppComponent]
 })
 export class AppModule {
