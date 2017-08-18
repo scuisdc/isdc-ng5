@@ -1,0 +1,98 @@
+
+<div class = "col-md-4 col-sm-4">
+  <div class="row">
+  <div id="matrix1" class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4"><h2>矩阵1:</h2>
+    <textarea [(ngModel)]="textarea.matrix1" rows="3" class="form-control" id='mInput1' placeholder="1 2 3&#10;4 5 6&#10;7 8 9"></textarea>
+  </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
+    <button class="col-md-6 col-sm-6 btn btn-default"  (click)="transpose('matrix1')">转置</button>
+    <button class="col-md-6 col-sm-6 btn btn-default" (click)="getDetaminate('matrix1')" >求行列式</button>
+  </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getAdjoint('matrix1')">伴随矩阵</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getInverseMatrix('matrix1')">求逆矩阵</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getOrthogonalization('matrix1')">正交化</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getUnit('matrix1')">单位化</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
+      <button class="col-md-12 col-sm-12 btn btn-default" (click)="getOrthogonalUnit('matrix1')">正交单位化</button>
+    </div>
+  </div>
+
+
+</div>
+<div class="col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1">
+  <div class="center-block">
+
+    <div class="row">
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <input type='button' class="btn btn-default"(click)="exchange()" value="互换">
+    </div>
+    <br>
+    <div class="row">
+      <input type='button' class="btn btn-default" (click)='multiply()' value="相乘">
+    </div>
+    <br>
+    <div class="row">
+      <input type='button' class="btn btn-default" (click)='add()' value="相加">
+    </div>
+    <br>
+    <div class="row">
+      <input type='button' class="btn btn-default" (click)="subtract()" value="相减">
+    </div>
+  </div>
+</div>
+
+<div class = "col-md-4 col-sm-4">
+  <div class="row">
+  <div id="matrix2" class="col-md-8"><h2>矩阵2:</h2>
+    <textarea [(ngModel)]="textarea.matrix2" rows="3" class="form-control" id='mInput2' placeholder="1 2 3&#10;4 5 6&#10;7 8 9"></textarea>
+  </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8  col-sm-8 ">
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="transpose('matrix2')">转置</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getDetaminate('matrix2')">求行列式</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8  col-sm-8 ">
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getAdjoint('matrix2')">伴随矩阵</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getInverseMatrix('matrix2')">求逆矩阵</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8  col-sm-8 ">
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getOrthogonalization('matrix2')">正交化</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getUnit('matrix2')">单位化</button>
+    </div>
+  </div>
+  <div class="row">
+    <div  class="col-md-8  col-sm-8 ">
+      <button class="col-md-12 col-sm-12 btn btn-default" (click)="getOrthogonalUnit('matrix2')">正交单位化</button>
+    </div>
+  </div>
+</div>
+
+
+<div  class="col-lg-12">
+  <br>
+  <br>
+  <div id='result' *ngIf = 'result' > <pre>{{result}}</pre></div>
+
+</div>
+
