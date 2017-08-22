@@ -19,39 +19,18 @@ export class ServiceMatrixComponent implements OnInit {
   ngOnInit() {
   }
 
-  calculateInit() {
-    let stringMatrix1:string[];
-    let stringMatrix2:string[];
-
-    stringMatrix1 = this.textarea.matrix1.split('\n');
-    stringMatrix2 = this.textarea.matrix2.split('\n');
-
-    let matrix1_row : number = stringMatrix1.length;
-    let matrix2_row : number = stringMatrix2.length;
-    stringMatrix1 = this.textarea.matrix1.split(/\s+/);
-    stringMatrix2 = this.textarea.matrix2.split(/\s+/);
-    let matrix1_col : number= stringMatrix1.length / matrix1_row;
-    let matrix2_col : number= stringMatrix2.length / matrix2_row;
-
-    let tempMatrix1 : number[][]=[];
-    let tempMatrix2 : number[][]=[];
-    for(let r = 0,i=0;r<matrix1_row;r++){
-      tempMatrix1.push([0]);
-      for(let c = 0;c<matrix1_col;i++,c++){
-      tempMatrix1[r][c]=parseFloat(stringMatrix1[i]) ;
+  matrixInit(stringMatrix:string){
+    let matrix_row : number  = stringMatrix.split('\n').length;
+    let formatMatrix : string[] = stringMatrix.split(/\s+/);
+    let matrix_col : number  = formatMatrix.length/matrix_row;
+    let tempMatrix : number[][]=[];
+    for(let r = 0,i=0;r<matrix_row;r++){
+      tempMatrix.push([0]);
+      for(let c = 0;c<matrix_col;i++,c++){
+        tempMatrix[r][c]=parseFloat(formatMatrix[i]) ;
       }
     }
-    for(let r = 0,i=0;r<matrix2_row;r++){
-      tempMatrix2.push([0]);
-      for(let c = 0;c<matrix2_col;i++,c++){
-        tempMatrix2[r][c]=parseFloat(stringMatrix2[i]) ;
-      }
-
-    }
-
-    this.matrix1 = new Matrix(tempMatrix1);
-    this.matrix2 = new Matrix(tempMatrix2);
-
+    return new Matrix(tempMatrix);
   }
 
   outMatrix(result:Matrix){
@@ -66,48 +45,44 @@ export class ServiceMatrixComponent implements OnInit {
   };
   outNumber(result : number){
     let tempResult :string = "结果为:" + result.toFixed(3)+"\n";
-
     this.result = tempResult + this.result;
   }
-  multiply(){
-      this.calculateInit();
-      this.outMatrix(this.linearAlgebra.multiply(this.matrix1,this.matrix2));
+
+  multiply(stringMatrix1:string,stringMatrix2:string){
+    if(stringMatrix1!=''&&stringMatrix2!='')
+      this.outMatrix(this.linearAlgebra.multiply(this.matrixInit(stringMatrix1),this.matrixInit(stringMatrix2)));
+    else alert("请输入待计算矩阵");
   }
-  add(){
-    this.calculateInit();
-    this.outMatrix(this.linearAlgebra.add(this.matrix1,this.matrix2));
+  add(stringMatrix1:string,stringMatrix2:string){
+    if(stringMatrix1!=''&&stringMatrix2!='')
+    this.outMatrix(this.linearAlgebra.add(this.matrixInit(stringMatrix1),this.matrixInit(stringMatrix2)));
+    else alert("请输入待计算矩阵");
   }
 //矩阵转置
-  transpose(choose:string){
-    this.calculateInit();
-    if(choose == "matrix1"){
-      this.outMatrix(this.linearAlgebra.transpose(this.matrix1));
-    }
-    else if(choose == "matrix2"){
-      this.outMatrix(this.linearAlgebra.transpose(this.matrix2));
-    }
+  transpose(stringMatrix:string){
+    if(stringMatrix!='')
+      this.outMatrix(this.linearAlgebra.transpose(this.matrixInit(stringMatrix)));
+    else alert("请输入待计算矩阵");
   }
   //矩阵减法
-  subtract(){
-    this.calculateInit();
-    this.outMatrix(this.linearAlgebra.subtract(this.matrix1,this.matrix2));
+  subtract(stringMatrix1:string,stringMatrix2:string){
+    if(stringMatrix1!=''&&stringMatrix2!='')
+    this.outMatrix(this.linearAlgebra.subtract(this.matrixInit(stringMatrix1),this.matrixInit(stringMatrix2)));
+    else alert("请输入待计算矩阵");
   }
   //求行列式
-  getDetaminate(choose:string){
-    this.calculateInit();
-    let result:number;
-    if(choose == "matrix1"){
-      result = this.linearAlgebra.getDetaminate(this.matrix1);
+  getDetaminate(stringMatrix:string){
+    if(stringMatrix!='') {
+      let result: number;
+      result = this.linearAlgebra.getDetaminate(this.matrixInit(stringMatrix));
+      if (result != null) {
+        this.outNumber(result);
+      }
+      else {
+        alert("计算错误,该矩阵无行列式")
+      }
     }
-    else if(choose == "matrix2"){
-      result = this.linearAlgebra.getDetaminate(this.matrix2);
-    }
-    if(result!=null){
-      this.outNumber(result);
-    }
-    else{
-      alert("计算错误,该矩阵无行列式")
-    }
+    else alert("请输入待计算矩阵");
   }
   //互换
   exchange(){
@@ -116,83 +91,49 @@ export class ServiceMatrixComponent implements OnInit {
     this.textarea.matrix2 = tempMatrix;
   }
 //求伴随矩阵
-  getAdjoint(choose:string){
-    this.calculateInit();
-    let result : Matrix;
-    if(choose == "matrix1"){
-      result = this.linearAlgebra.getAdjoint(this.matrix1);
-    }
-    else if(choose == "matrix2"){
-    result = this.linearAlgebra.getAdjoint(this.matrix2);
-    }
-
+  getAdjoint(stringMatrix:string){
+    if(stringMatrix!=''){
+    let result : Matrix = this.linearAlgebra.getAdjoint(this.matrixInit(stringMatrix));
     if (result!=null){
       this.outMatrix(result);
     }
     else{
       alert("计算错误,该矩阵无伴随矩阵");
     }
-
+      }
+    else alert("请输入待计算矩阵");
   }
 //求逆矩阵
-  getInverseMatrix(choose:string){
-    this.calculateInit();
-    let result : Matrix;
-    if(choose == "matrix1"){
-      result = this.linearAlgebra.getInverseMatrix(this.matrix1);
-    }
-    else if(choose == "matrix2"){
-      result = this.linearAlgebra.getInverseMatrix(this.matrix2);
-    }
+  getInverseMatrix(stringMatrix:string){
+    if(stringMatrix!=''){
+    let result : Matrix = this.linearAlgebra.getInverseMatrix(this.matrixInit(stringMatrix));
     if (result!=null){
       this.outMatrix(result);
     }
     else{
       alert("计算错误,该矩阵无逆矩阵");
     }
-
+      }
+    else alert("请输入待计算矩阵");
   }
 //矩阵正交化
-  getOrthogonalization(choose:string){
-    this.calculateInit();
-    let result : Matrix;
-    if(choose == "matrix1"){
-      result = this.linearAlgebra.getOrthogonalization(this.matrix1);
-    }
-    else if(choose == "matrix2"){
-      result = this.linearAlgebra.getOrthogonalization(this.matrix2);
-    }
-
-      this.outMatrix(result);
-
+  getOrthogonalization(stringMatrix:string){
+    if(stringMatrix!='')
+      this.outMatrix(this.linearAlgebra.getOrthogonalization(this.matrixInit(stringMatrix)));
+    else alert("请输入待计算矩阵");
   }
 
   //矩阵单位化
-  getUnit(choose:string){
-    this.calculateInit();
-    let result : Matrix;
-    if(choose == "matrix1"){
-      result = this.linearAlgebra.getUnit(this.matrix1);
-    }
-    else if(choose == "matrix2"){
-      result = this.linearAlgebra.getUnit(this.matrix2);
-    }
-
-    this.outMatrix(result);
+  getUnit(stringMatrix:string){
+    if(stringMatrix!='')
+    this.outMatrix(this.linearAlgebra.getUnit(this.matrixInit(stringMatrix)));
+    else alert("请输入待计算矩阵");
   }
   //矩阵正交单位化
-  getOrthogonalUnit(choose:string){
-    this.calculateInit();
-    let result : Matrix;
-    if(choose == "matrix1"){
-      result = this.linearAlgebra.getOrthogonalUnit(this.matrix1);
-    }
-    else if(choose == "matrix2"){
-      result = this.linearAlgebra.getOrthogonalUnit(this.matrix2);
-    }
-
-    this.outMatrix(result);
-
+  getOrthogonalUnit(stringMatrix:string){
+    if(stringMatrix!='')
+    this.outMatrix(this.linearAlgebra.getOrthogonalUnit(this.matrixInit(stringMatrix)));
+    else alert("请输入待计算矩阵");
   }
 
 }

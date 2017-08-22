@@ -7,25 +7,25 @@
   </div>
   <div class="row">
     <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
-    <button class="col-md-6 col-sm-6 btn btn-default"  (click)="transpose('matrix1')">转置</button>
-    <button class="col-md-6 col-sm-6 btn btn-default" (click)="getDetaminate('matrix1')" >求行列式</button>
+    <button class="col-md-6 col-sm-6 btn btn-default"  (click)="transpose(textarea.matrix1)">转置</button>
+    <button class="col-md-6 col-sm-6 btn btn-default" (click)="getDetaminate(textarea.matrix1)" >求行列式</button>
   </div>
   </div>
   <div class="row">
     <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getAdjoint('matrix1')">伴随矩阵</button>
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getInverseMatrix('matrix1')">求逆矩阵</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getAdjoint(textarea.matrix1)">伴随矩阵</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getInverseMatrix(textarea.matrix1)">求逆矩阵</button>
     </div>
   </div>
   <div class="row">
     <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getOrthogonalization('matrix1')">正交化</button>
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getUnit('matrix1')">单位化</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getOrthogonalization(textarea.matrix1)">正交化</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getUnit(textarea.matrix1)">单位化</button>
     </div>
   </div>
   <div class="row">
     <div  class="col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4">
-      <button class="col-md-12 col-sm-12 btn btn-default" (click)="getOrthogonalUnit('matrix1')">正交单位化</button>
+      <button class="col-md-12 col-sm-12 btn btn-default" (click)="getOrthogonalUnit(textarea.matrix1)">正交单位化</button>
     </div>
   </div>
 
@@ -44,15 +44,15 @@
     </div>
     <br>
     <div class="row">
-      <input type='button' class="btn btn-default" (click)='multiply()' value="相乘">
+      <input type='button' class="btn btn-default" (click)='multiply(textarea.matrix1,textarea.matrix2)' value="相乘">
     </div>
     <br>
     <div class="row">
-      <input type='button' class="btn btn-default" (click)='add()' value="相加">
+      <input type='button' class="btn btn-default" (click)='add(textarea.matrix1,textarea.matrix2)' value="相加">
     </div>
     <br>
     <div class="row">
-      <input type='button' class="btn btn-default" (click)="subtract()" value="相减">
+      <input type='button' class="btn btn-default" (click)="subtract(textarea.matrix1,textarea.matrix2)" value="相减">
     </div>
   </div>
 </div>
@@ -65,25 +65,25 @@
   </div>
   <div class="row">
     <div  class="col-md-8  col-sm-8 ">
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="transpose('matrix2')">转置</button>
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getDetaminate('matrix2')">求行列式</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="transpose(textarea.matrix2)">转置</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getDetaminate(textarea.matrix2)">求行列式</button>
     </div>
   </div>
   <div class="row">
     <div  class="col-md-8  col-sm-8 ">
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getAdjoint('matrix2')">伴随矩阵</button>
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getInverseMatrix('matrix2')">求逆矩阵</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getAdjoint(textarea.matrix2)">伴随矩阵</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getInverseMatrix(textarea.matrix2)">求逆矩阵</button>
     </div>
   </div>
   <div class="row">
     <div  class="col-md-8  col-sm-8 ">
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getOrthogonalization('matrix2')">正交化</button>
-      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getUnit('matrix2')">单位化</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getOrthogonalization(textarea.matrix2)">正交化</button>
+      <button class="col-md-6 col-sm-6 btn btn-default" (click)="getUnit(textarea.matrix2)">单位化</button>
     </div>
   </div>
   <div class="row">
     <div  class="col-md-8  col-sm-8 ">
-      <button class="col-md-12 col-sm-12 btn btn-default" (click)="getOrthogonalUnit('matrix2')">正交单位化</button>
+      <button class="col-md-12 col-sm-12 btn btn-default" (click)="getOrthogonalUnit(textarea.matrix2)">正交单位化</button>
     </div>
   </div>
 </div>
