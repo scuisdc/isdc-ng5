@@ -173,60 +173,68 @@ export class LinearAlgebra {
 
   //求逆矩阵
   getInverseMatrix(matrix: Matrix) {
-    if(this.isSquareMatrix(matrix)) {
+    if (this.isSquareMatrix(matrix)) {
       let result: Matrix = this.getAdjoint(matrix);
       let det: number = this.getDetaminate(matrix);
-
-      for (let r = 0; r < result.row; r++) {
-        for (let c = 0; c < result.col; c++) {
-          result.matrix[r][c] = result.matrix[r][c] / det;
+      if (det != 0) {
+        for (let r = 0; r < result.row; r++) {
+          for (let c = 0; c < result.col; c++) {
+            result.matrix[r][c] = result.matrix[r][c] / det;
+          }
         }
+        return result;
       }
-      return result;
+      else {
+        return null;
+      }
+
     }
-   else{
+    else {
       return null;
     }
   }
+
   //矩阵正交化
-  getOrthogonalization(matrix:Matrix){
-    let result : number[][] = [] ;
-    for(let r1=0;r1<matrix.row;r1++){
+  getOrthogonalization(matrix: Matrix) {
+    let result: number[][] = [];
+    for (let r1 = 0; r1 < matrix.row; r1++) {
       result.push([0]);
-      for(let c2 = 0;c2<matrix.col;c2++){
-        let sum3:number = 0;
-        for(let r2=0;r2<r1;r2++){
-          let sum1:number=0,sum2:number=0;
-          for(let c1=0;c1<matrix.col;c1++){
-            sum1+=matrix.matrix[r1][c1]*result[r2][c1];
-            sum2+=result[r2][c1]*result[r2][c1];
+      for (let c2 = 0; c2 < matrix.col; c2++) {
+        let sum3: number = 0;
+        for (let r2 = 0; r2 < r1; r2++) {
+          let sum1: number = 0, sum2: number = 0;
+          for (let c1 = 0; c1 < matrix.col; c1++) {
+            sum1 += matrix.matrix[r1][c1] * result[r2][c1];
+            sum2 += result[r2][c1] * result[r2][c1];
           }
-          sum3 +=(sum1/sum2)*result[r2][c2];
+          sum3 += (sum1 / sum2) * result[r2][c2];
         }
 
-        result[r1][c2] = matrix.matrix[r1][c2]-sum3;
+        result[r1][c2] = matrix.matrix[r1][c2] - sum3;
       }
     }
     return new Matrix(result);
   }
+
 //矩阵单位化
-  getUnit(matrix:Matrix){
-    let result:number[][]=[];
-    for(let r=0;r<matrix.row;r++){
-      let sum:number = 0;
+  getUnit(matrix: Matrix) {
+    let result: number[][] = [];
+    for (let r = 0; r < matrix.row; r++) {
+      let sum: number = 0;
       result.push([0]);
-      for(let c=0;c<matrix.col;c++){
-        sum+=matrix.matrix[r][c] * matrix.matrix[r][c];
+      for (let c = 0; c < matrix.col; c++) {
+        sum += matrix.matrix[r][c] * matrix.matrix[r][c];
       }
-      for(let c=0;c<matrix.col;c++){
-        result[r][c] = matrix.matrix[r][c]/Math.sqrt(sum);
+      for (let c = 0; c < matrix.col; c++) {
+        result[r][c] = matrix.matrix[r][c] / Math.sqrt(sum);
       }
 
     }
     return new Matrix(result);
   }
+
   //矩阵正交单位化
-  getOrthogonalUnit(matrix:Matrix){
+  getOrthogonalUnit(matrix: Matrix) {
     return this.getUnit(this.getOrthogonalization(matrix));
   }
 
