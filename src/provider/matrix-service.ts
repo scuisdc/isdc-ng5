@@ -6,10 +6,10 @@ import {Api} from './api';
 import 'rxjs/Rx';
 import {Headers, RequestOptions} from '@angular/http';
 import {Holder} from './holder';
-import {Matrix}from '../provider/Matrix'
+import {Matrix}from '../../entity/matrix'
 import {letProto} from "rxjs/operator/let";
 @Injectable()
-export class LinearAlgebra {
+export class matrixService {
 
   constructor() {
   }
@@ -92,33 +92,35 @@ export class LinearAlgebra {
   //求行列式
   getDetaminate(matrix: Matrix) {
     if (this.isSquareMatrix(matrix)) {
-      let i, j, m, n, s, t, k = 1;
-      let N = matrix.row;
-      let f = 1, c, x, det = 0;
-      for (i = 0, j = 0; i < N && j < N; i++, j++) {
-        if (matrix.matrix[i][j] == 0) {
-          for (m = i; m < matrix.row && matrix.matrix[m][j] == 0; m++);
-          if (m == N) {
+      let row, col, rowStep, colStep, flag = 1;
+      let order = matrix.row;
+      let product = 1,det = 0;
+      for (row = 0, col = 0; row < order && col < order; row++, col++) {
+        if (matrix.matrix[row][col] == 0) {
+          for (rowStep = row; rowStep < order && matrix.matrix[rowStep][col] == 0; rowStep++);
+          if (rowStep == order) {
             det = 0;
             return det;
           } else
-            for (n = j; n < N; n++) {
-              c = matrix.matrix[i][n];
-              matrix.matrix[i][n] = matrix.matrix[m][n];
-              matrix.matrix[m][n] = c;
+            for (colStep = col; colStep < order;colStep++) {
+
+              let temp = matrix.matrix[row][colStep];
+              matrix.matrix[row][colStep] = matrix.matrix[rowStep][colStep];
+              matrix.matrix[rowStep][colStep] = temp;
             }
-          k *= (-1);
+          flag *= (-1);
         }
-        for (s = N - 1; s > i; s--) {
-          x = matrix.matrix[s][j];
-          for (t = j; t < N; t++)
-            matrix.matrix[s][t] -= matrix.matrix[i][t] * (x / matrix.matrix[i][j]);
+        for (let r:number = order - 1; r > row; r--) {
+          let book = matrix.matrix[r][col];
+          for (let c:number  = col; c < order; c++)
+            matrix.matrix[r][c] -= matrix.matrix[row][c] * (book / matrix.matrix[row][col]);
         }
 
       }
-      for (i = 0; i < N; i++)
-        f *= matrix.matrix[i][i];
-      det = k * f;
+      for (row = 0; row < order; row++)
+        product *= matrix.matrix[row][row];
+
+      det = flag * product;
       return det;
     }
     else {
@@ -129,30 +131,30 @@ export class LinearAlgebra {
   //求伴随矩阵
   getAdjoint(matrix: Matrix) {
     if (this.isSquareMatrix(matrix)) {
-      let matrix_z: number[][][] = [];
-      for (let k = 0, z = 0; k < matrix.row && z < matrix.row * matrix.col; k++) {
-        for (let K = 0; K < matrix.col; K++) {
-          matrix_z.push([[]]);
+      let bufferMatrix: number[][][] = [];
+      for (let stepRow = 0, step = 0; stepRow < matrix.row && step < matrix.row * matrix.col; stepRow++) {
+        for (let stepCol = 0; stepCol < matrix.col; stepCol++) {
+          bufferMatrix.push([[]]);
           //let tempMatrix_z:number[][] = [];
-          for (let i5 = 0, m5 = 0; i5 < matrix.row && m5 < matrix.row - 1; i5++) {
-            for (let p = 0, M = 0; p < matrix.col && M < matrix.col - 1; p++) {
-              if (p != K) {
-                if (matrix_z[z][M] == null) {
-                  matrix_z[z].push([0]);
+          for (let row = 0, bmCol = 0; row < matrix.row && bmCol < matrix.col - 1; row++) {
+            for (let col = 0, bmRow = 0; col < matrix.col && bmRow < matrix.row - 1; col++) {
+              if (col != stepCol) {
+                if (bufferMatrix[step][bmRow] == null) {
+                  bufferMatrix[step].push([0]);
                 }
-                if ((i5 + p) % 2 == 0) {
-                  matrix_z[z][M][m5] = matrix.matrix[i5][p];
-                  M++;
+                if ((row + col) % 2 == 0) {
+                  bufferMatrix[step][bmRow][bmCol] = matrix.matrix[row][col];
+                  bmRow++;
                 } else {
-                  matrix_z[z][M][m5] = -matrix.matrix[i5][p];
-                  M++;
+                  bufferMatrix[step][bmRow][bmCol] = -matrix.matrix[row][col];
+                  bmRow++;
                 }
               }
             }
-            if (i5 != k)
-              m5++;
+            if (row != stepRow)
+              bmCol++;
           }
-          z++;
+          step++;
         }
       }
 
@@ -160,7 +162,7 @@ export class LinearAlgebra {
       for (let r = 0, count = 0; r < matrix.row; r++) {
         resultArr.push([0]);
         for (let c = 0; c < matrix.col; c++, count++) {
-          resultArr[r][c] = this.getDetaminate(new Matrix(matrix_z[count]));
+          resultArr[r][c] = this.getDetaminate(new Matrix(bufferMatrix[count]));
         }
       }
       return this.transpose(new Matrix(resultArr));

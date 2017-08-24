@@ -29,7 +29,7 @@ import {PostComponent} from './post/post.component';
 import {ServiceKongMinHaoComponent} from './service-kong-min-hao/service-kong-min-hao.component';
 import {KongMinHaoService} from '../provider/KongMinHaoService';
 import { ServiceMatrixComponent } from './service-matrix/service-matrix.component';
-import {LinearAlgebra}from'../provider/LinearAlgebra'
+import {matrixService}from'../provider/matrix-service'
 import {from} from "rxjs/observable/from";
 const appRoutes: Routes = [{
   path: '',
@@ -126,7 +126,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, KongMinHaoService,LinearAlgebra],
+  providers: [User, Api, Holder, JWCService, KongMinHaoService,matrixService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
