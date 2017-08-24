@@ -2,12 +2,9 @@
  * Created by Lenovo on 2017/8/15.
  */
 import {Injectable} from '@angular/core';
-import {Api} from './api';
 import 'rxjs/Rx';
-import {Headers, RequestOptions} from '@angular/http';
-import {Holder} from './holder';
-import {Matrix}from '../../entity/matrix'
-import {letProto} from "rxjs/operator/let";
+import {Matrix} from '../entity/matrix'
+
 @Injectable()
 export class matrixService {
 

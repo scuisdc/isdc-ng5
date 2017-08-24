@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {matrixService}from '../../provider/matrix-service'
-import {Matrix} from '../../../entity/matrix'
-import {templateJitUrl} from "@angular/compiler";
+import {matrixService} from '../../provider/matrix-service'
+import {Matrix} from '../../entity/matrix'
+
 @Component({
   selector: 'app-service-matrix',
   templateUrl: './service-matrix.component.html',

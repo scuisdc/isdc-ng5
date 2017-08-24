@@ -1,11 +1,7 @@
 /**
  * Created by Watermelon1gugu on 2017/8/15.
  */
-import {Injectable} from '@angular/core';
-import {Api} from '../src/provider/api';
 import 'rxjs/Rx';
-import {Headers, RequestOptions} from '@angular/http';
-import {Holder} from '../src/provider/holder';
 
 export class Matrix {
   public matrix: number[][];
