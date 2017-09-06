@@ -120,20 +120,24 @@ export class ServiceJWCComponent implements OnInit {
 
   parseGPA(score: number): number {
     let gpa;
-    if (score >= 95) {
+    if (score >= 90) {
       gpa = 4.0;
-    } else if (score >= 90) {
-      gpa = 3.8;
     } else if (score >= 85) {
-      gpa = 3.6;
+      gpa = 3.7;
     } else if (score >= 80) {
-      gpa = 3.2;
-    } else if (score >= 75) {
+      gpa = 3.3;
+    } else if (score >= 76) {
+      gpa = 3.0;
+    } else if (score >= 73) {
       gpa = 2.7;
     } else if (score >= 70) {
-      gpa = 2.2;
-    } else if (score >= 65) {
+      gpa = 2.3;
+    } else if (score >= 66) {
+      gpa = 2.0;
+    } else if (score >= 63) {
       gpa = 1.7;
+    } else if (score >= 61) {
+      gpa = 1.3;
     } else if (score >= 60) {
       gpa = 1.0;
     } else {
