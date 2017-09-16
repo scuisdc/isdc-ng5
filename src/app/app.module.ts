@@ -34,8 +34,8 @@ import {SendPostComponent} from './send-post/send-post.component';
 import {HisPostComponent} from './his-post/his-post.component';
 import {UpdatePostComponent} from './update-post/update-post.component';
 import { ServiceMatrixComponent } from './service-matrix/service-matrix.component';
-import {matrixService} from'../provider/matrix-service'
-import {from} from 'rxjs/observable/from';
+import {matrixService} from '../provider/matrix-service';
+
 const appRoutes: Routes = [{
   path: '',
   component: IndexComponent,
@@ -47,10 +47,27 @@ const appRoutes: Routes = [{
 }, {
   path: 'blog',
   component: BlogComponent,
-  data: {title: '博客', color: '#FFFFFF'}
-}, {
-  path: 'blog/:id',
-  component: PostComponent,
+  children: [{
+    path: 'all-post',
+    component: AllPostComponent,
+    data: {title: '发博客', color: '#FFFFFF'}
+  }, {
+    path: ':id',
+    component: PostComponent,
+    data: {title: '博文详情', color: '#FFFFFF'}
+  }, {
+    path: 'update-post/:id',
+    component: UpdatePostComponent,
+    data: {title: '编辑博文', color: '#FFFFFF'}
+  }, {
+    path: 'his-post/:user_name',
+    component: HisPostComponent,
+    data: {title: '那谁的博客', color: '#FFFFFF'}
+  }, {
+    path: '',
+    redirectTo: 'all-post',
+    pathMatch: 'full'
+  }],
   data: {title: '博客', color: '#FFFFFF'}
 }, {
   path: 'intro',
@@ -131,7 +148,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, KongMinHaoService, BlogService,matrixService],
+  providers: [User, Api, Holder, JWCService, KongMinHaoService, BlogService, matrixService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
