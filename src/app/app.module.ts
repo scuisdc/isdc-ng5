@@ -50,6 +50,10 @@ const appRoutes: Routes = [{
   children: [{
     path: 'all-post',
     component: AllPostComponent,
+    data: {title: '所有博文', color: '#FFFFFF'}
+  }, {
+    path: 'send-post',
+    component: SendPostComponent,
     data: {title: '发博客', color: '#FFFFFF'}
   }, {
     path: ':id',
@@ -106,6 +110,10 @@ const appRoutes: Routes = [{
     component: ServiceKongMinHaoComponent,
     data: {title: '资产加加加', color: '#FFFFFF'}
   }, {
+    path: 'Matrix',
+    component: ServiceMatrixComponent,
+    data: {title: '资产加加加', color: '#FFFFFF'}
+  }, {
     path: '',
     redirectTo: 'jwc',
     pathMatch: 'full'
@@ -138,7 +146,10 @@ const appRoutes: Routes = [{
     HisPostComponent,
     UpdatePostComponent,
     PostComponent,
-    ServiceMatrixComponent
+    ServiceMatrixComponent,
+    AllPostComponent,
+    SendPostComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
