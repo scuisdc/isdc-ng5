@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Holder} from '../../provider/holder';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -8,19 +8,25 @@ import {Holder} from '../../provider/holder';
 })
 export class BlogComponent implements OnInit {
 
-  posts: any;
+  titleNow: string;
 
-  constructor(private holder: Holder) {
-    holder.getPosts().map(data => data.json()).subscribe(data => {
-      this.posts = data.data;
-    });
+  constructor(public router: Router, public activatedRoute: ActivatedRoute) {
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .map(() => this.activatedRoute)
+      .map(route => {
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
+        return route;
+      })
+      .mergeMap(route => route.data)
+      .subscribe((event) => {
+        this.titleNow = event['title'];
+      });
   }
 
   ngOnInit() {
-  }
-
-  parseDate(time: number): string {
-    return new Date(time).toLocaleString();
   }
 
 }

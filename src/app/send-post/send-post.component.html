@@ -1,0 +1,50 @@
+<div class="col-md-12">
+  <form id="send-post-form" #postInfoForm="ngForm" (ngSubmit)="sendPost()">
+    <div class="form-group">
+      <label for="title">文章标题: </label>
+      <input required type="text"
+             class="form-control col-md-4"
+             id="title"
+             name="title"
+             placeholder="文章标题"
+             [(ngModel)]="title"/>
+      <br><br><br><br>
+      <div id="preview-column" class="full-container">
+        <div class="left-column">
+          <label for="preview">内容概述: </label>
+          <textarea required class="form-control"
+                    id="preview"
+                    name="preview"
+                    rows="5"
+                    placeholder="文章描述, 请用MarkDown文本撰写"
+                    [(ngModel)]="preview"></textarea>
+        </div>
+        <div class="right-column">
+          <label>实时预览: </label>
+          <markdown [data]="preview"></markdown>
+        </div>
+      </div>
+      <br><br>
+      <div id="content-column" class="full-container">
+        <div class="left-column">
+          <label for="preview">文章内容: </label>
+          <textarea required class="form-control"
+                    id="content"
+                    name="content"
+                    rows="25"
+                    placeholder="文章内容, 请用MarkDown文本撰写"
+                    [(ngModel)]="content"></textarea>
+        </div>
+        <div class="right-column">
+          <label>实时预览: </label>
+          <markdown [data]="content"></markdown>
+        </div>
+      </div>
+      <br><br>
+      <input type="submit"
+             class="btn btn-primary"
+             [value]="!userService.user?'请登录后再发表博文':(loading?'正在发表':'发表')"
+             [disabled]="postInfoForm.form.invalid||!userService.user||loading"/>
+    </div>
+  </form>
+</div>

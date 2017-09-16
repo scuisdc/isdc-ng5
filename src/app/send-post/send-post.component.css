@@ -1,0 +1,18 @@
+.full-container {
+  width: 100%;
+  display: inline-block;
+}
+
+.left-column {
+  float: left;
+  width: 49%;
+}
+
+.right-column {
+  float: right;
+  width: 49%;
+}
+
+textarea {
+  resize: vertical;
+}
