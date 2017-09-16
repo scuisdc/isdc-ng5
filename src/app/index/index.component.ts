@@ -15,7 +15,7 @@ export class IndexComponent implements OnInit {
     }, {
       icon: 'assets/ic_flash_black.svg',
       title: '信息安全入门',
-      detail: '只有实践才是最好的掌握方式，我们要深刻贯彻这一点。每周日下午的信息安全实践，从信息获取到漏洞发掘再到信息隐藏，Let\'semester Hack'
+      detail: '只有实践才是最好的掌握方式，我们要深刻贯彻这一点。每周日下午的信息安全实践，从信息获取到漏洞发掘再到信息隐藏，Let\'s Hack'
     }, {
       icon: 'assets/ic_favorite_black.svg',
       title: '精彩活动继续',
