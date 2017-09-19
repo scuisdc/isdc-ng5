@@ -1,74 +1,15 @@
 <div class="container header-margin">
   <ol class="breadcrumb">
     <li>博客</li>
-    <li class="active">
-      <a routerLink="/blog">所有博文</a>
-    </li>
+    <!--<li class="active"><a routerLink="{{(titleNow=='所有博文')?'/blog/all-post':(titleNow=='发博客'?'/blog/send-post':(titleNow=='我的博客'?'/blog/my-post':'/blog'))}}">{{titleNow}}</a></li>-->
+    <li class="active">{{titleNow}}</li>
   </ol>
   <div class="row">
-    <div class="col-md-8">
-      <h1 class="page-header">所有博文 </h1>
-      <div id="blog-content">
-        <div *ngFor="let post of posts;">
-          <h2>
-            {{post.title}}
-            <small>
-              by <a>{{post.userName}}</a>
-            </small>
-          </h2>
-          <p>
-            <span class="glyphicon glyphicon-time"></span>
-            最后更新: {{parseDate(post.lastModified)}}
-          </p>
-          <markdown>{{post.preview}}</markdown>
-          <a class="btn btn-primary btn-sm" [routerLink]="post.id">
-            阅读更多 <span class="glyphicon glyphicon-chevron-right"></span>
-          </a>
-          <hr>
-        </div>
-      </div>
-      <div class="pager">
-        <nav>
-          <ul class="pagination">
-            <li class="disabled">
-              <a aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li id="page-1">
-              <a routerLink="blog/">1</a>
-            </li>
-            <li class="disabled">
-              <a aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    <!--<div class="col-md-4">-->
-    <!--<div class="well" style="margin-top:10px;">-->
-    <!--<h4>博客分类</h4>-->
-    <!--<div class="row">-->
-    <!--<div class="col-lg-8">-->
-    <!--<ul class="list-unstyled">-->
-    <!--<li>-->
-    <!--<a href="./index.php?page=1">全部博客</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a href="./index.php?page=1&category=1">开源镜像</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a href="./index.php?page=1&category=2">JavaScript</a>-->
-    <!--</li>-->
-    <!--<li>-->
-    <!--<a href="./index.php?page=1&category=3">Writeup</a>-->
-    <!--</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+    <article class="col-xs-12 maincontent">
+      <header class="page-header">
+        <h1 class="page-title">{{titleNow}}</h1>
+      </header>
+      <router-outlet></router-outlet>
+    </article>
   </div>
 </div>

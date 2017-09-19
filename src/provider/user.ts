@@ -78,16 +78,4 @@ export class User {
     return '';
   }
 
-  sendComment(myComment: string, postId: number) {
-    let seq = this.api.post(`blog/post/${postId}/comment`, {
-      content: myComment,
-      commentDate: new Date()
-    }, this.requestOption).share();
-    seq.subscribe(() => {
-    }, err => {
-      console.error('ERROR', err);
-      this.holder.alerts.push({level: 'alert-danger', content: '评论失败，请稍后再试'});
-    });
-    return seq;
-  }
 }

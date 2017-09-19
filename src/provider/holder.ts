@@ -12,7 +12,9 @@ export class Holder {
   banners: Response;
   scores: any[];
   posts: Response;
+  myPosts: Response;
   content: { [key: string]: Response; } = {};
+  myContent: { [key: string]: Response } = {};
   comment: { [key: string]: Response; } = {};
   money: number;
   Rank: any[];
@@ -59,48 +61,6 @@ export class Holder {
       this.banners = data;
     }, err => {
       this.alerts.push({level: 'alert-danger', content: '横幅获取失败，请稍后再试'});
-      console.error('ERROR', err);
-    });
-    return seq;
-  }
-
-  getPosts(): Observable<Response> {
-    if (this.posts) {
-      return Observable.of(this.posts);
-    }
-    const seq = this.api.get('blog/post').share();
-    seq.subscribe((data) => {
-      this.posts = data;
-    }, err => {
-      this.alerts.push({level: 'alert-danger', content: '博文获取失败，请稍后再试'});
-      console.error('ERROR', err);
-    });
-    return seq;
-  }
-
-  getBlogContent(id: number) {
-    if (this.content[id]) {
-      return Observable.of(this.content[id]);
-    }
-    const seq = this.api.get(`blog/post/${id}`).share();
-    seq.subscribe((data) => {
-      this.content[id.toString()] = data;
-    }, err => {
-      this.alerts.push({level: 'alert-danger', content: '博文详情获取失败，请稍后再试'});
-      console.error('ERROR', err);
-    });
-    return seq;
-  }
-
-  getBlogComment(id: number) {
-    // if (this.comment[id]) {
-    //   return Observable.of(this.comment[id]);
-    // }
-    const seq = this.api.get(`blog/post/${id}/comment`).share();
-    seq.subscribe((data) => {
-      this.comment[id.toString()] = data;
-    }, err => {
-      this.alerts.push({level: 'alert-danger', content: '博文评论获取失败，请稍后再试'});
       console.error('ERROR', err);
     });
     return seq;

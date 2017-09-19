@@ -1,9 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Holder} from '../../provider/holder';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {User} from '../../provider/user';
 import {Api} from '../../provider/api';
+import {BlogService} from '../../provider/BlogService';
+import {logging} from 'selenium-webdriver';
+import getLevel = logging.getLevel;
 
 @Component({
   selector: 'app-post',
@@ -18,21 +21,25 @@ export class PostComponent implements OnInit, OnDestroy {
   myComment = '';
   loading = false;
 
-  constructor(public holder: Holder, private route: ActivatedRoute, public user: User, private api: Api) {
+  constructor(public holder: Holder, private route: ActivatedRoute, public user: User, public blogService: BlogService, public router: Router) {
   }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.post.id = +params['id'];
-      this.holder.getBlogContent(+params['id']).map(data => data.json()).subscribe(data => {
-        this.post = data.data;
+      this.blogService.getBlogContent(+params['id']).map(data => data.json()).subscribe(data => {
+        if (data.code === 200) {
+          this.post = data.data;
+        } else {
+          this.holder.alerts.push({level: 'alert-danger', content: '没有这篇博文，载入失败'});
+          this.router.navigateByUrl('/blog');
+        }
       });
-
-      this.holder.getBlogComment(+params['id']).map(data => data.json()).subscribe(data => {
+      this.blogService.getBlogComment(+params['id']).map(data => data.json()).subscribe(data => {
         this.comments = data.data;
       });
-
     });
+    this.myComment = '';
   }
 
   ngOnDestroy() {
@@ -45,15 +52,25 @@ export class PostComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.loading = true;
-    this.user.sendComment(this.myComment, this.post.id).map(data => data.json()).subscribe(data => {
+    this.blogService.sendComment(this.myComment, this.post.id).map(data => data.json()).subscribe(data => {
       if (data.code === 200) {
         this.holder.alerts.push({level: 'alert-success', content: '评论成功'});
-        this.comments.push({content: this.myComment, userName: this.user.user.userName, commentDate: new Date()});
-        this.myComment = '';
+        this.ngOnInit();
       } else {
-        this.holder.alerts.push({level: 'alert-success', content: '评论成功'});
+        this.holder.alerts.push({level: 'alert-danger', content: '评论失败'});
       }
       this.loading = false;
+    });
+  }
+
+  delComment(postId: number, commentId: number) {
+    this.blogService.delComment(postId, commentId).map(data => data.json()).subscribe(data => {
+      if (data.code === 200) {
+        this.holder.alerts.push({level: 'alert-success', content: '删除评论成功'});
+      } else {
+        this.holder.alerts.push({level: 'alert-danger', content: '删除评论失败'});
+      }
+      this.ngOnInit();
     });
   }
 }

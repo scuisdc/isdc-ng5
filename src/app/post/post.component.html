@@ -1,11 +1,11 @@
-<div class="container header-margin">
-  <ol class="breadcrumb">
-    <li>博客</li>
-    <li>
-      <a routerLink="/blog">所有博文</a>
-    </li>
-    <li class="active">{{post.title}}</li>
-  </ol>
+<div>
+  <!--<ol class="breadcrumb">-->
+  <!--<li>博客</li>-->
+  <!--<li>-->
+  <!--<a routerLink="/blog">所有博文</a>-->
+  <!--</li>-->
+  <!--<li class="active">{{post.title}}</li>-->
+  <!--</ol>-->
   <div id="blog" class="row">
     <article class="col-md-12 maincontent">
       <div class="post-content">
@@ -13,7 +13,7 @@
           <h1>{{post.title}}</h1>
           <h2>
             <small>
-              by <a>{{post.userName}}</a>
+              by <a [routerLink]="'../his-post/' + post.userName">{{post.userName}}</a>
             </small>
           </h2>
         </div>
@@ -27,11 +27,15 @@
         <h3 class="text-primary">评论区</h3>
         <div id="comments-field">
           <div *ngFor="let comment of comments;">
-
             <div class="comment-cell">
               <h4>
                 {{comment.userName}}
-                <small>{{parseDate(comment.commentDate)}}</small>
+                <small>
+                  {{parseDate(comment.commentDate)}}
+                  &nbsp;
+                  <a *ngIf="user.user&&(user.user.userName==post.userName||user.user.userName==comment.userName)"
+                     (click)="delComment(post.id,comment.id)">删除</a>
+                </small>
               </h4>
               <markdown>{{comment.content}}</markdown>
             </div>

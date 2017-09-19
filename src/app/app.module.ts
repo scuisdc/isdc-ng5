@@ -24,13 +24,18 @@ import {ScheduleComponent} from './schedule/schedule.component';
 import {ServiceComponent} from './service/service.component';
 import {ServiceJWCComponent} from './service-jwc/service-jwc.component';
 import {JWCService} from '../provider/JWCService';
-import {BlogComponent} from './blog/blog.component';
+import {AllPostComponent} from './all-post/all-post.component';
 import {PostComponent} from './post/post.component';
 import {ServiceKongMinHaoComponent} from './service-kong-min-hao/service-kong-min-hao.component';
 import {KongMinHaoService} from '../provider/KongMinHaoService';
+import {BlogService} from '../provider/BlogService';
+import {BlogComponent} from './blog/blog.component';
+import {SendPostComponent} from './send-post/send-post.component';
+import {HisPostComponent} from './his-post/his-post.component';
+import {UpdatePostComponent} from './update-post/update-post.component';
 import { ServiceMatrixComponent } from './service-matrix/service-matrix.component';
-import {matrixService}from'../provider/matrix-service'
-import {from} from "rxjs/observable/from";
+import {matrixService} from '../provider/matrix-service';
+
 const appRoutes: Routes = [{
   path: '',
   component: IndexComponent,
@@ -42,10 +47,31 @@ const appRoutes: Routes = [{
 }, {
   path: 'blog',
   component: BlogComponent,
-  data: {title: '博客', color: '#FFFFFF'}
-}, {
-  path: 'blog/:id',
-  component: PostComponent,
+  children: [{
+    path: 'all-post',
+    component: AllPostComponent,
+    data: {title: '所有博文', color: '#FFFFFF'}
+  }, {
+    path: 'send-post',
+    component: SendPostComponent,
+    data: {title: '发博客', color: '#FFFFFF'}
+  }, {
+    path: ':id',
+    component: PostComponent,
+    data: {title: '博文详情', color: '#FFFFFF'}
+  }, {
+    path: 'update-post/:id',
+    component: UpdatePostComponent,
+    data: {title: '编辑博文', color: '#FFFFFF'}
+  }, {
+    path: 'his-post/:user_name',
+    component: HisPostComponent,
+    data: {title: '那谁的博客', color: '#FFFFFF'}
+  }, {
+    path: '',
+    redirectTo: 'all-post',
+    pathMatch: 'full'
+  }],
   data: {title: '博客', color: '#FFFFFF'}
 }, {
   path: 'intro',
@@ -86,7 +112,7 @@ const appRoutes: Routes = [{
   }, {
     path: 'Matrix',
     component: ServiceMatrixComponent,
-    data: {title: '矩阵计算器', color: '#FFFFFF'}
+    data: {title: '资产加加加', color: '#FFFFFF'}
   }, {
     path: '',
     redirectTo: 'jwc',
@@ -116,7 +142,14 @@ const appRoutes: Routes = [{
     ServiceKongMinHaoComponent,
     BlogComponent,
     PostComponent,
-    ServiceMatrixComponent
+    SendPostComponent,
+    HisPostComponent,
+    UpdatePostComponent,
+    PostComponent,
+    ServiceMatrixComponent,
+    AllPostComponent,
+    SendPostComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,7 +159,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, KongMinHaoService,matrixService],
+  providers: [User, Api, Holder, JWCService, KongMinHaoService, BlogService, matrixService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
