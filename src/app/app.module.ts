@@ -33,8 +33,10 @@ import {BlogComponent} from './blog/blog.component';
 import {SendPostComponent} from './send-post/send-post.component';
 import {HisPostComponent} from './his-post/his-post.component';
 import {UpdatePostComponent} from './update-post/update-post.component';
-import { ServiceMatrixComponent } from './service-matrix/service-matrix.component';
+import {ServiceMatrixComponent} from './service-matrix/service-matrix.component';
 import {matrixService} from '../provider/matrix-service';
+import {CTFService} from '../provider/CTFService';
+import {ServiceCTFComponent} from './service-ctf/service-ctf.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -112,7 +114,11 @@ const appRoutes: Routes = [{
   }, {
     path: 'Matrix',
     component: ServiceMatrixComponent,
-    data: {title: '资产加加加', color: '#FFFFFF'}
+    data: {title: '矩阵计算器', color: '#FFFFFF'}
+  }, {
+    path: 'CTF',
+    component: ServiceCTFComponent,
+    data: {title: 'CTF平台', color: '#FFFFFF'}
   }, {
     path: '',
     redirectTo: 'jwc',
@@ -150,6 +156,7 @@ const appRoutes: Routes = [{
     AllPostComponent,
     SendPostComponent,
     PostComponent,
+    ServiceCTFComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ export class UpdatePostComponent implements OnInit {
   content = '';
   author = ''
 
-  loading = false; //发送时是否在加载
+  loading = false; // 发送时是否在加载
   isPostExist = true;
 
   constructor(public blogService: BlogService, public userService: User, public holder: Holder, private route: ActivatedRoute, public router: Router) {
