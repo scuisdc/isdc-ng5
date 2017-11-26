@@ -18,7 +18,8 @@ export class Holder {
   comment: { [key: string]: Response; } = {};
   money: number;
   Rank: any[];
-
+  CTFProblems:any[];
+  switch:boolean;
   constructor(public api: Api) {
 
   }

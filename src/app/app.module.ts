@@ -157,6 +157,7 @@ const appRoutes: Routes = [{
     SendPostComponent,
     PostComponent,
     ServiceCTFComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -166,7 +167,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, KongMinHaoService, BlogService, matrixService],
+  providers: [User, Api, Holder, JWCService, KongMinHaoService, BlogService, matrixService,CTFService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
