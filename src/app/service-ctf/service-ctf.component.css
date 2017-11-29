@@ -1,0 +1,12 @@
+ul li {
+
+  display: inline-block;
+  width:25%;
+  line-height:50px;
+  float: left;
+  padding: 5px;
+}
+a {
+  width:200px;
+  height: 35px;
+}

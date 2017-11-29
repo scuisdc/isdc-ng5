@@ -1,0 +1,45 @@
+<div class="col-md-12">
+  <div *ngIf="!holder.switch">
+    <ul class="a" *ngFor="let item of holder.CTFProblems">
+      <li><a class="btn btn-default" (click)="ctfProblem=item;holder.switch=true">{{item.title}}</a></li>
+    </ul>
+  </div>
+  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" *ngIf="holder.switch">
+    <div class="panel-heading" class = "h2">{{ctfProblem.title}}
+      <button type="button" class="close" (click)="holder.switch=false"><span
+        aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form  #kmhForm="ngForm" id="form" class="form-horizontal"
+          role="form">
+      <p>id:{{ctfProblem.id}}</p>
+      <hr/>
+      <p>{{ctfProblem.data}}</p>
+      <hr/>
+      <p>发布时间:{{ctfProblem.time}}</p>
+      <hr/>
+      <p >题目链接:<a [href] = "ctfProblem.magnet">{{ctfProblem.magnet}}</a></p>
+      <p>发布者:{{ctfProblem.userName}}</p>
+      <label for="Flag" class="col-sm-2 control-label">Flag&nbsp;</label>
+      <div class="col-sm-10">
+        <input #Flag (keyup)="0"  type="text" required class="form-control"
+               id="Flag"
+               name="Flag"
+               placeholder="Flag">
+      </div>
+      <hr/>
+      <br><br>
+
+
+      <div class="form-group text-center">
+        <button class="btn btn-warning btn-lg"
+                (click)="submitAnswer(ctfProblem.id,Flag.value)">确认
+        </button>
+      </div>
+      <br>
+
+    </form>
+
+  </div>
+
+</div>
