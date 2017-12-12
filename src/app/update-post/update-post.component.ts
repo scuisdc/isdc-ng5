@@ -15,7 +15,7 @@ export class UpdatePostComponent implements OnInit {
   title = '';
   preview = '';
   content = '';
-  author = ''
+  author = '';
 
   loading = false; // 发送时是否在加载
   isPostExist = true;
@@ -24,19 +24,17 @@ export class UpdatePostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.postId = +params['id'];
-      this.blogService.getBlogContent(this.postId).map(data => data.json()).subscribe(data => {
-        if (data.code === 200) {
-          this.title = data.data.title;
-          this.preview = data.data.preview;
-          this.content = data.data.content;
-          this.author = data.data.userName;
-        } else {
-          this.holder.alerts.push({level: 'alert-danger', content: '没有这篇博文，载入失败'});
-          this.router.navigateByUrl('/blog');
-        }
-      });
+    this.postId = this.route.params['value']['id'];
+    this.blogService.getBlogContent(this.postId).map(data => data.json()).subscribe(data => {
+      if (data.code === 200) {
+        this.title = data.data.title;
+        this.preview = data.data.preview;
+        this.content = data.data.content;
+        this.author = data.data.authorUserName;
+      } else {
+        this.holder.alerts.push({level: 'alert-danger', content: '没有这篇博文，载入失败'});
+        this.router.navigateByUrl('/blog');
+      }
     });
   }
 

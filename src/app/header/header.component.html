@@ -21,9 +21,9 @@
           [ngClass]="{'dropdown':true,'active':titleNow==='所有博文'||titleNow==='发博客'||titleNow==='我的博客'}">
           <a class="dropdown-toggle" data-toggle="dropdown">博客<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a routerLink="/blog/all-post">所有博文</a></li>
+            <li><a routerLink="/blog">所有博文</a></li>
             <li *ngIf="user.user"><a routerLink="/blog/send-post">发博客</a></li>
-            <li *ngIf="user.user"><a [routerLink]="'/blog/his-post/' + user.user.userName">我的博客</a></li>
+            <li *ngIf="user.user"><a [routerLink]="'/blog/' + user.user.userName">我的博客</a></li>
           </ul>
         </li>
 
@@ -39,9 +39,8 @@
           <a class="dropdown-toggle" data-toggle="dropdown">公共服务<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li ><a routerLink="/services/jwc">教务信息查询</a></li>
-            <li><a routerLink="/services/KongMinHao">孔壕加加加</a></li>
             <li><a routerLink="/services/Matrix">矩阵计算器</a></li>
-            <li><a routerLink="/services/CTF">CTF平台</a></li>
+            <!--<li><a routerLink="/services/CTF">CTF平台</a></li>-->
             <!--<li><a routerLink="/services/ctfInfo">CTF信息</a></li>-->
             <!--<li><a routerLink="/services/exploit">Wooyun漏洞查询</a></li>-->
           </ul>
@@ -62,8 +61,8 @@
         <!--<input type="text" class="nav-form-control" placeholder="Search" id="bdcsMain" required>-->
         <!--</div>-->
         <!--</form>-->
-        <li *ngIf="!user.user" [ngClass]="{'active':titleNow==='登录/注册'}"><a routerLink="login">登录/注册</a></li>
-        <li *ngIf="user.user"
+        <li *ngIf="!user.user.userName" [ngClass]="{'active':titleNow==='登录/注册'}"><a routerLink="login">登录/注册</a></li>
+        <li *ngIf="user.user.userName"
             [ngClass]="{'dropdown':true,'active':titleNow==='个人中心'}">
           <a class="dropdown-toggle" data-toggle="dropdown">{{user.user.userName}}<b class="caret"></b></a>
           <ul class="dropdown-menu">

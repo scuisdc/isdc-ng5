@@ -3,10 +3,8 @@ import {Holder} from '../../provider/holder';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {User} from '../../provider/user';
-import {Api} from '../../provider/api';
 import {BlogService} from '../../provider/BlogService';
 import {logging} from 'selenium-webdriver';
-import getLevel = logging.getLevel;
 
 @Component({
   selector: 'app-post',
@@ -26,8 +24,8 @@ export class PostComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
-      this.post.id = +params['id'];
-      this.blogService.getBlogContent(+params['id']).map(data => data.json()).subscribe(data => {
+      this.post.id = params['id'];
+      this.blogService.getBlogContent(params['id']).map(data => data.json()).subscribe(data => {
         if (data.code === 200) {
           this.post = data.data;
         } else {

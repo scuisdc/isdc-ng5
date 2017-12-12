@@ -13,6 +13,7 @@ export class BlogService {
   private requestOption: RequestOptions = new RequestOptions({headers: this.headers, withCredentials: true});
 
   constructor(public api: Api, public holder: Holder, public userService: User) {
+    userService.createAuthorizationHeader(this.headers);
   }
 
   getPosts() {
@@ -44,12 +45,12 @@ export class BlogService {
   }
 
   getHisPosts(userName: string) {
-    const seq = this.api.get(`blog/post/his-post/${userName}`).share();
+    const seq = this.api.get(`blog/${userName}`).share();
     seq.subscribe(data => {
       this.holder.myPosts = data;
     }, err => {
       this.holder.alerts.push({level: 'alert-danger', content: '暂时找不到他的博文哦'});
-    })
+    });
     return seq;
   }
 
@@ -82,7 +83,7 @@ export class BlogService {
   }
 
   sendComment(myComment: string, postId: number) {
-    let seq = this.api.post(`blog/post/${postId}/comment`, {
+    const seq = this.api.put(`blog/post/${postId}/comment`, {
       content: myComment,
       commentDate: new Date()
     }, this.requestOption).share();
@@ -95,7 +96,7 @@ export class BlogService {
   }
 
   sendPost(title: string, preview: string, content: string) {
-    let seq = this.api.post('blog/post/new-post', {
+    const seq = this.api.put('blog/post', {
       title: title,
       preview: preview,
       content: content
@@ -109,7 +110,7 @@ export class BlogService {
   }
 
   updatePost(title: string, preview: string, content: string, postId: number) {
-    let seq = this.api.post('blog/post/update-post', {
+    const seq = this.api.post('blog/post/update-post', {
       id: postId,
       title: title,
       preview: preview,
@@ -124,7 +125,7 @@ export class BlogService {
   }
 
   delComment(postId: number, commentId: number) {
-    let seq = this.api.delete(`blog/post/${postId}/comment/${commentId}`, this.requestOption).share();
+    const seq = this.api.delete(`blog/post/${postId}/comment/${commentId}`, this.requestOption).share();
     seq.subscribe(() => {
     }, err => {
       console.error('ERROR', err);
@@ -134,7 +135,7 @@ export class BlogService {
   }
 
   delPost(postId: number) {
-    let seq = this.api.delete(`blog/post/${postId}`, this.requestOption).share();
+    const seq = this.api.delete(`blog/post/${postId}`, this.requestOption).share();
     seq.subscribe(() => {
     }, err => {
       console.error('ERROR', err);
