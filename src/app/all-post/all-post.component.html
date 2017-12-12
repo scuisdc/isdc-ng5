@@ -14,7 +14,7 @@
           <h2>
             {{post.title}}
             <small>
-              by <a [routerLink]="'../'+post.authorUserName">{{post.authorUserName}}</a>
+              by <a [routerLink]="'./'+post.authorUserName">{{post.authorUserName}}</a>
             </small>
           </h2>
           <p>
@@ -26,11 +26,11 @@
             最后更新: {{parseDate(post.lastModified)}}
           </p>
           <markdown [data]="post.preview"></markdown>
-          <a class="btn btn-primary btn-sm" [routerLink]="'../post/'+post.id">
+          <a class="btn btn-primary btn-sm" [routerLink]="'./post/'+post.id">
             阅读更多 <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
           <a class="btn btn-primary btn-sm"
-             [routerLink]="'../update-post/' + post.id"
+             [routerLink]="'./update-post/' + post.id"
              *ngIf="userService.user&&userService.user.userName==post.authorUserName">
             编辑 <span class="glyphicon glyphicon-pencil"></span>
           </a>&nbsp;
