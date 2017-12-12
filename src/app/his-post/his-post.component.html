@@ -7,7 +7,7 @@
           <h2>
             {{post.title}}
             <small>
-              by <a>{{post.userName}}</a>
+              by <a>{{post.authorUserName}}</a>
             </small>
           </h2>
           <p>
@@ -19,16 +19,16 @@
             最后更新: {{parseDate(post.lastModified)}}
           </p>
           <markdown [data]="post.preview"></markdown>
-          <a class="btn btn-primary btn-sm" [routerLink]="'../../'+post.id">
+          <a class="btn btn-primary btn-sm" [routerLink]="'../post/'+post.id">
             阅读更多 <span class="glyphicon glyphicon-chevron-right"></span>
           </a>&nbsp;
           <a class="btn btn-primary btn-sm"
-             [routerLink]="'../../update-post/' + post.id"
-             *ngIf="userService.user&&userService.user.userName==post.userName">
+             [routerLink]="'../update-post/' + post.id"
+             *ngIf="userService.user&&userService.user.userName==post.authorUserName">
             编辑 <span class="glyphicon glyphicon-pencil"></span>
           </a>&nbsp;
           <a class="btn btn-primary btn-sm" (click)="delPost(post.id)"
-             *ngIf="userService.user&&userService.user.userName==post.userName">
+             *ngIf="userService.user&&userService.user.userName==post.authorUserName">
             删除 <span class="glyphicon glyphicon-remove"></span>
           </a>
           <hr>

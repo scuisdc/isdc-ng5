@@ -13,7 +13,7 @@
           <h1>{{post.title}}</h1>
           <h2>
             <small>
-              by <a [routerLink]="'../his-post/' + post.userName">{{post.userName}}</a>
+              by <a [routerLink]="'../../' + post.authorUserName">{{post.authorUserName}}</a>
             </small>
           </h2>
         </div>
@@ -29,12 +29,13 @@
           <div *ngFor="let comment of comments;">
             <div class="comment-cell">
               <h4>
-                {{comment.userName}}
+                {{comment.senderUserName}}
                 <small>
                   {{parseDate(comment.commentDate)}}
                   &nbsp;
-                  <a *ngIf="user.user&&(user.user.userName==post.userName||user.user.userName==comment.userName)"
-                     (click)="delComment(post.id,comment.id)">删除</a>
+                  <a
+                    *ngIf="user.user&&(user.user.userName==post.authorUserName||user.user.userName==comment.senderUserName)"
+                    (click)="delComment(post.id,comment.id)">删除</a>
                 </small>
               </h4>
               <markdown>{{comment.content}}</markdown>
