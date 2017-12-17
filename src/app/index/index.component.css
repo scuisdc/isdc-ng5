@@ -87,6 +87,7 @@
   -moz-transition: all 0.4s ease-out;
   -o-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out;
+  z-index: 5;
 }
 
 .slogan {

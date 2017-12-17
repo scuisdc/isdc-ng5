@@ -23,18 +23,22 @@ import {Holder} from '../provider/holder';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {ServiceComponent} from './service/service.component';
 import {ServiceJWCComponent} from './service-jwc/service-jwc.component';
-import {JWCService} from '../provider/JWCService';
+import {JWCService} from '../provider/jwc-service';
 import {AllPostComponent} from './all-post/all-post.component';
 import {PostComponent} from './post/post.component';
-import {BlogService} from '../provider/BlogService';
+import {BlogService} from '../provider/blog-service';
 import {BlogComponent} from './blog/blog.component';
 import {SendPostComponent} from './send-post/send-post.component';
 import {HisPostComponent} from './his-post/his-post.component';
 import {UpdatePostComponent} from './update-post/update-post.component';
 import {ServiceMatrixComponent} from './service-matrix/service-matrix.component';
-import {matrixService} from '../provider/matrix-service';
-import {CTFService} from '../provider/CTFService';
+import {MatrixService} from '../provider/matrix-service';
+import {CTFService} from '../provider/ctf-service';
 import {ServiceCTFComponent} from './service-ctf/service-ctf.component';
+import {ServiceMailComponent} from './service-mail/service-mail.component';
+import {MailService} from '../provider/mail-service';
+import {MailAccountsComponent} from './mail-accounts/mail-accounts.component';
+import {MailFoldersComponent} from './mail-folders/mail-folders.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -102,11 +106,11 @@ const appRoutes: Routes = [{
     component: ServiceJWCComponent,
     data: {title: '教务信息查询', color: '#FFFFFF'}
   }, {
-    path: 'Matrix',
+    path: 'matrix',
     component: ServiceMatrixComponent,
     data: {title: '矩阵计算器', color: '#FFFFFF'}
   }, {
-    path: 'CTF',
+    path: 'ctf',
     component: ServiceCTFComponent,
     data: {title: 'CTF平台', color: '#FFFFFF'}
   }, {
@@ -115,6 +119,18 @@ const appRoutes: Routes = [{
     pathMatch: 'full'
   }],
   data: {title: '关于我们', color: '#FFFFFF'}
+}, {
+  path: 'mail',
+  component: ServiceMailComponent,
+  children: [{
+    path: ':mailboxId',
+    component: MailAccountsComponent,
+    children: [{
+      path: ':mailFolderId',
+      component: MailFoldersComponent,
+      data: {title: '邮箱', color: '#FFFFFF'}
+    }]
+  }]
 }, {path: '**', component: PageNotFoundComponent, data: {title: '出错啦', color: '#000000'}}];
 
 
@@ -146,6 +162,9 @@ const appRoutes: Routes = [{
     SendPostComponent,
     PostComponent,
     ServiceCTFComponent,
+    ServiceMailComponent,
+    MailAccountsComponent,
+    MailFoldersComponent,
 
   ],
   imports: [
@@ -156,7 +175,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, BlogService, matrixService, CTFService],
+  providers: [User, Api, Holder, JWCService, BlogService, MatrixService, CTFService, MailService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,0 +1,195 @@
+.no-padding {
+  padding: 0;
+}
+
+.mail-preview {
+  padding: 9px 5px 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  overflow: hidden;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.mail-preview-wrapper {
+  border-left: 4px solid transparent;
+  /*padding-right: 24px;*/
+}
+
+.mail-preview-wrapper:hover {
+  background: #e9e9e9;
+}
+
+.mail-preview-wrapper.active {
+  background: #bbbbbb;
+}
+
+.mail-preview-wrapper.unread {
+  border-left: 4px solid #D24726;
+}
+
+.mail-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  overflow: hidden;
+}
+
+.mail-content-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  overflow: hidden;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212121;
+}
+
+.mail-content-from {
+  font-weight: 400;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #212121;
+}
+
+.mail-content-from.unread {
+  font-weight: 600;
+}
+
+.mail-content-operations {
+  right: -1px;
+  padding: 1px 0 0 10px;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  top: 0;
+}
+
+.mail-operation {
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #666666;
+  margin: 0 2px;
+}
+
+.list-group-item {
+  padding: 0;
+}
+
+.mail-content-md {
+  padding-top: 1px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  overflow: hidden;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-align: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #212121;
+}
+
+.mail-content-md.unread {
+  color: #D24726;
+  font-weight: 600;
+}
+
+.mail-content-subject {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.mail-content-date {
+  padding-left: 16px;
+}
+
+.mail-content-btm {
+  padding-top: 1px;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: 400;
+  color: #666666;
+}
+
+.placeholder {
+  height: 450px;
+  background: url("https://o11vcttoe.qnssl.com/choose_email.png") no-repeat center center;
+  text-align: center;
+}
+
+.mail-detail-subject {
+  font-size: 24px;
+  font-weight: 600;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.mail-html {
+  max-width: 500px;
+  font-size: 20px;
+  padding: 30px;
+}
+
+.mail-detail-from {
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 30px;
+}

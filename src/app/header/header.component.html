@@ -26,7 +26,9 @@
             <li *ngIf="user.user"><a [routerLink]="'/blog/' + user.user.userName">我的博客</a></li>
           </ul>
         </li>
-
+        <li [ngClass]="{'active':titleNow==='邮箱'}">
+          <a routerLink="/mail">邮件平台</a>
+        </li>
         <!--<li class="dropdown">-->
         <!--<a class="dropdown-toggle" data-toggle="dropdown">训练中心<b class="caret"></b></a>-->
         <!--<ul class="dropdown-menu">-->
@@ -38,8 +40,8 @@
         <li [ngClass]="{'dropdown':true,'active':titleNow==='教务信息查询'||titleNow==='孔壕加加加'||titleNow==='矩阵计算器'}">
           <a class="dropdown-toggle" data-toggle="dropdown">公共服务<b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li ><a routerLink="/services/jwc">教务信息查询</a></li>
-            <li><a routerLink="/services/Matrix">矩阵计算器</a></li>
+            <li><a routerLink="/services/jwc">教务信息查询</a></li>
+            <li><a routerLink="/services/matrix">矩阵计算器</a></li>
             <!--<li><a routerLink="/services/CTF">CTF平台</a></li>-->
             <!--<li><a routerLink="/services/ctfInfo">CTF信息</a></li>-->
             <!--<li><a routerLink="/services/exploit">Wooyun漏洞查询</a></li>-->

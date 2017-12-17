@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BlogService} from '../../provider/BlogService';
+import {BlogService} from '../../provider/blog-service';
 import {User} from '../../provider/user';
 import {Holder} from '../../provider/holder';
 import {ActivatedRoute, Router} from '@angular/router';

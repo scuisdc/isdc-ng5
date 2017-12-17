@@ -9,8 +9,10 @@ import {Title} from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
   color = '#ffffff';
+  private clientHeight: number;
 
   constructor(public router: Router, public activatedRoute: ActivatedRoute, public titleService: Title) {
+    this.clientHeight = window.innerHeight;
   }
 
   ngOnInit(): void {

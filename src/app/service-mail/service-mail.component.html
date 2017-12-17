@@ -1,0 +1,65 @@
+<div class="container-no-left header-padding">
+  <br><br>
+  <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#exampleModal">
+    <span class="glyphicon glyphicon-send" aria-hidden="true"></span> 写邮件
+  </button>
+  <button type="button" class="btn btn-primary btn-md" (click)="refresh()">
+    刷新
+  </button>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel">发邮件</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">发件人:</label>
+              <select id="sender-name" name="slect-from" [(ngModel)]="temp.accountId" class="form-control">
+                <option *ngFor="let account of this.holder.accounts" [value]="account.id+' '+account.account">
+                  {{account.account}}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label">收件人:</label>
+              <input type="text" name="input-to" [(ngModel)]="temp.to" class="form-control" id="recipient-name">
+            </div>
+            <div class="form-group">
+              <label for="mail-subject" class="control-label">主题:</label>
+              <input type="text" name="input-subject" [(ngModel)]="temp.subject" class="form-control" id="mail-subject">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label">邮件内容:</label>
+              <textarea class="form-control" name="input-textBody" [(ngModel)]="temp.textBody"
+                        id="message-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <button type="button" (click)="sendMail()" data-dismiss="modal" class="btn btn-primary">发送</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <aside class="col-md-2 sidebar">
+      <ul class="nav nav-side">
+        <li *ngFor="let account of accounts" [ngClass]="{'selected':this.holder.activeMailAccount===account.id}">
+          <a [routerLink]="account.id">
+            {{account.alias==null?account.account:account.alias}}<b></b>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <article class="col-md-10">
+      <router-outlet></router-outlet>
+    </article>
+  </div>
+</div>

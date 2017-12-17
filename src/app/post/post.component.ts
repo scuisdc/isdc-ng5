@@ -3,8 +3,7 @@ import {Holder} from '../../provider/holder';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {User} from '../../provider/user';
-import {BlogService} from '../../provider/BlogService';
-import {logging} from 'selenium-webdriver';
+import {BlogService} from '../../provider/blog-service';
 
 @Component({
   selector: 'app-post',

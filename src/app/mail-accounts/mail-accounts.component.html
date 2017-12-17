@@ -1,0 +1,8 @@
+<div class="col-md-12">
+  <ul class="nav nav-tabs">
+    <li *ngFor="let folder of folders" [ngClass]="{'active':this.holder.activeMailFolder===folder.id}">
+      <a [routerLink]="folder.id">{{folder.alias}}</a>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>
