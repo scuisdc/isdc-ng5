@@ -22,11 +22,11 @@
           <a class="dropdown-toggle" data-toggle="dropdown">博客<b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a routerLink="/blog">所有博文</a></li>
-            <li *ngIf="user.user"><a routerLink="/blog/send-post">发博客</a></li>
-            <li *ngIf="user.user"><a [routerLink]="'/blog/' + user.user.userName">我的博客</a></li>
+            <li *ngIf="user.user.userName"><a routerLink="/blog/send-post">发博客</a></li>
+            <li *ngIf="user.user.userName"><a [routerLink]="'/blog/' + user.user.userName">我的博客</a></li>
           </ul>
         </li>
-        <li [ngClass]="{'active':titleNow==='邮箱'}">
+        <li *ngIf="user.user.userName" [ngClass]="{'active':titleNow==='邮箱'}">
           <a routerLink="/mail">邮件平台</a>
         </li>
         <!--<li class="dropdown">-->
