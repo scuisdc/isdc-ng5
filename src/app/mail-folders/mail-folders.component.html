@@ -7,7 +7,8 @@
             <div class="mail-content">
               <div class="mail-content-top">
                 <div class="mail-content-from" (click)="read(mail)" [ngClass]="{'unread': !mail.seen}">
-                  {{mail.from.includes(' ') ? mail.from.split(' ')[0] : mail.from}}
+                  {{mail.from.includes(' ') ? (mail.from.split(' ')[0] === 'null' ? mail.from.split(' ')[1] :
+                  mail.from.split(' ')[0]) : mail.from}}
                 </div>
                 <div class="mail-content-operations">
                   <span class="glyphicon mail-operation" (click)="markAsSeen(mail)"
