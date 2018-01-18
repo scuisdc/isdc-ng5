@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Holder} from '../../provider/holder';
-import {BlogService} from '../../provider/BlogService';
+import {BlogService} from '../../provider/blog-service';
 import {ActivatedRoute} from '@angular/router';
 import {User} from '../../provider/user';
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Holder} from '../../provider/holder';
-import {BlogService} from '../../provider/BlogService';
+import {BlogService} from '../../provider/blog-service';
 import {User} from '../../provider/user';
 
 @Component({
@@ -12,6 +12,10 @@ export class AllPostComponent implements OnInit {
 
   posts: any;
 
+  static parseDate(time: number): string {
+    return new Date(time).toLocaleString();
+  }
+
   constructor(public holder: Holder, public blogService: BlogService, public userService: User) {
   }
 
@@ -19,10 +23,6 @@ export class AllPostComponent implements OnInit {
     this.blogService.getPosts().map(data => data.json()).subscribe(data => {
       this.posts = data.data;
     });
-  }
-
-  parseDate(time: number): string {
-    return new Date(time).toLocaleString();
   }
 
   delPost(id: number) {

@@ -3,6 +3,7 @@ import {Api} from './api';
 import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '@angular/http';
+
 @Injectable()
 export class Holder {
 
@@ -18,8 +19,13 @@ export class Holder {
   comment: { [key: string]: Response; } = {};
   money: number;
   Rank: any[];
-  CTFProblems:any[];
-  switch:boolean;
+  CTFProblems: any[];
+  switch: boolean;
+  accounts: any[];
+  folders: { [key: number]: any[]; } = {};
+  activeMailAccount: number;
+  activeMailFolder: number;
+
   constructor(public api: Api) {
 
   }

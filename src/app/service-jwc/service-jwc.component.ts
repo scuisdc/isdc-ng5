@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JWCService} from '../../provider/JWCService';
+import {JWCService} from '../../provider/jwc-service';
 import {Holder} from '../../provider/holder';
 
 @Component({

@@ -1,1 +1,8 @@
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -302px;
+}
 
+.push {
+  min-height: 302px;
+}

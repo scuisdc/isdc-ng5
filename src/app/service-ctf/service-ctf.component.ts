@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CTFService} from "../../provider/CTFService";
+import {CTFService} from "../../provider/ctf-service";
 import {Holder} from '../../provider/holder';
 
 @Component({

@@ -3,6 +3,7 @@ import {Api} from './api';
 import 'rxjs/Rx';
 import {Headers, RequestOptions} from '@angular/http';
 import {Holder} from './holder';
+
 @Injectable()
 export class JWCService {
   private headers: Headers = new Headers();

@@ -3,6 +3,7 @@ import 'rxjs/Rx';
 import {Api} from './api';
 import {Headers, RequestOptions} from '@angular/http';
 import {Holder} from './holder';
+
 @Injectable()
 export class CTFService {
   private headers: Headers = new Headers();

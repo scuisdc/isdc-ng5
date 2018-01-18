@@ -71,7 +71,7 @@ export class User {
   }
 
   logOut() {
-    this.user = undefined;
+    this.user = {userName: '', accessToken: '', email: ''};
     localStorage.removeItem('accessToken');
   }
 
