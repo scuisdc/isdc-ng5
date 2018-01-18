@@ -26,9 +26,6 @@
             <li *ngIf="user.user.userName"><a [routerLink]="'/blog/' + user.user.userName">我的博客</a></li>
           </ul>
         </li>
-        <li *ngIf="user.user.userName" [ngClass]="{'active':titleNow==='邮箱'}">
-          <a routerLink="/mail">邮件平台</a>
-        </li>
         <!--<li class="dropdown">-->
         <!--<a class="dropdown-toggle" data-toggle="dropdown">训练中心<b class="caret"></b></a>-->
         <!--<ul class="dropdown-menu">-->

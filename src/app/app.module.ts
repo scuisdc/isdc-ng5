@@ -35,10 +35,6 @@ import {ServiceMatrixComponent} from './service-matrix/service-matrix.component'
 import {MatrixService} from '../provider/matrix-service';
 import {CTFService} from '../provider/ctf-service';
 import {ServiceCTFComponent} from './service-ctf/service-ctf.component';
-import {ServiceMailComponent} from './service-mail/service-mail.component';
-import {MailService} from '../provider/mail-service';
-import {MailAccountsComponent} from './mail-accounts/mail-accounts.component';
-import {MailFoldersComponent} from './mail-folders/mail-folders.component';
 
 const appRoutes: Routes = [{
   path: '',
@@ -119,18 +115,6 @@ const appRoutes: Routes = [{
     pathMatch: 'full'
   }],
   data: {title: '关于我们', color: '#FFFFFF'}
-}, {
-  path: 'mail',
-  component: ServiceMailComponent,
-  children: [{
-    path: ':mailboxId',
-    component: MailAccountsComponent,
-    children: [{
-      path: ':mailFolderId',
-      component: MailFoldersComponent,
-      data: {title: '邮箱', color: '#FFFFFF'}
-    }]
-  }]
 }, {path: '**', component: PageNotFoundComponent, data: {title: '出错啦', color: '#000000'}}];
 
 
@@ -162,10 +146,6 @@ const appRoutes: Routes = [{
     SendPostComponent,
     PostComponent,
     ServiceCTFComponent,
-    ServiceMailComponent,
-    MailAccountsComponent,
-    MailFoldersComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -175,7 +155,7 @@ const appRoutes: Routes = [{
     RouterModule.forRoot(appRoutes),
     MarkdownModule.forRoot()
   ],
-  providers: [User, Api, Holder, JWCService, BlogService, MatrixService, CTFService, MailService],
+  providers: [User, Api, Holder, JWCService, BlogService, MatrixService, CTFService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
